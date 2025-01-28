@@ -1,11 +1,29 @@
 cmake_minimum_required(VERSION 3.30)
-project(p7_skip_list)
+project(skip_list)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(p7_skip_list main.cc
+include(FetchContent)
+
+# Fetch nanobench
+FetchContent_Declare(
+        nanobench
+        GIT_REPOSITORY https://github.com/martinus/nanobench.git
+        GIT_TAG v4.1.0
+        GIT_SHALLOW TRUE
+)
+
+FetchContent_MakeAvailable(nanobench)
+
+add_executable(skip_list
+        main.cc
         apal/skip_list.cc
         apal/skip_list.h
         apal/skip_list_node.h
         apal/skip_list_node.cc
 )
+
+target_include_directories(skip_list PRIVATE ${nanobench_SOURCE_DIR})
+
+# Link nanobench to the skip list target
+target_link_libraries(skip_list PRIVATE nanobench)
