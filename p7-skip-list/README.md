@@ -1,1 +1,1 @@
-Follows C++ Style Guide [https://google.github.io/styleguide/cppguide.html](https://google.github.io/styleguide/cppguide.html)
+Follows Google's C++ Style Guide [https://google.github.io/styleguide/cppguide.html](https://google.github.io/styleguide/cppguide.html)
