@@ -19,11 +19,8 @@ add_executable(skip_list
         main.cc
         apal/skip_list.cc
         apal/skip_list.h
-        apal/skip_list_node.h
-        apal/skip_list_node.cc
 )
 
 target_include_directories(skip_list PRIVATE ${nanobench_SOURCE_DIR})
 
-# Link nanobench to the skip list target
 target_link_libraries(skip_list PRIVATE nanobench)
