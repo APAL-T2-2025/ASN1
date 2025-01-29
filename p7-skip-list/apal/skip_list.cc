@@ -27,14 +27,17 @@ namespace apal {
 
   void SkipList::init_header() {
     header = std::vector<Node*>(LEVEL_HEIGHT_MAX);
-    head = new Node(INT_MAX, 0, nullptr, nullptr, nullptr);
-    header[head->level] = head;
+    auto curr = new Node(INT_MAX, 0, nullptr, nullptr, nullptr);
+    header[curr->level] = curr;
 
-    for (auto curr = head; curr->level < LEVEL_HEIGHT_MAX;) {
+
+    while (curr->level < LEVEL_HEIGHT_MAX-1) {
       curr->up = new Node(INT_MAX, curr->level + 1, nullptr, nullptr, curr);
-      header[curr->level] = curr;
       curr = curr->up;
+      header[curr->level] = curr;
     }
+
+    head = header[LEVEL_HEIGHT_MAX-1];
   }
 
 
@@ -86,8 +89,6 @@ namespace apal {
 
     size++;
   }
-
-
 
 
   void SkipList::remove(int key) {}
