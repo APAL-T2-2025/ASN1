@@ -3,6 +3,7 @@ project(skip_list)
 
 set(CMAKE_CXX_STANDARD 20)
 
+
 include(FetchContent)
 
 # Fetch nanobench
@@ -24,3 +25,8 @@ add_executable(skip_list
 target_include_directories(skip_list PRIVATE ${nanobench_SOURCE_DIR})
 
 target_link_libraries(skip_list PRIVATE nanobench)
+
+
+if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
+    set(CMAKE_CXX_FLAGS -O3)
+endif()

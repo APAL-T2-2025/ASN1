@@ -5,9 +5,9 @@
 #include <random>
 #include <bits.h>
 #include <stdint.h>
+#include <iomanip>
 
-#define LEVEL_HEIGHT_MAX 8
-#define RANDOM_INT_SIZE_MAX UINT8_MAX
+#define STATIC_SEED 27
 
 namespace apal {
 
@@ -15,64 +15,61 @@ namespace apal {
                      Node* down)
     : key(key), level(level), next(next), up(up), down(down) {}
 
-
   SkipList::SkipList()
-  : size(0), distribution(0, RANDOM_INT_SIZE_MAX) {
+  : size(0), distribution(0, std::numeric_limits<RANDOM_INT_TYPE>::max()) {
+
+    // set seed
+    #ifdef STATIC_SEED
+    generator.seed(STATIC_SEED);
+    #else
     generator.seed(std::chrono::system_clock::now().time_since_epoch().count());
+    #endif
+
+    // create header and initialize -INFINITE and INFINITE
     init_header();
   }
-
 
   SkipList::~SkipList() {}
 
   void SkipList::init_header() {
     header = std::vector<Node*>(LEVEL_HEIGHT_MAX);
-    auto curr = new Node(-INT_MAX, 0, nullptr, nullptr, nullptr);
-    header[curr->level] = curr;
 
-    while (curr->level < LEVEL_HEIGHT_MAX-1) {
-      curr->up = new Node(-INT_MAX, curr->level + 1, nullptr, nullptr, curr);
-      curr = curr->up;
-      header[curr->level] = curr;
+    auto head_curr = new Node(-INFINITY, 0, nullptr, nullptr, nullptr);
+    head_curr->next = new Node(INFINITY, head_curr->level, nullptr, nullptr, nullptr);
+    header[head_curr->level] = head_curr;
+
+    while (head_curr->level < LEVEL_HEIGHT_MAX-1) {
+      head_curr->up = new Node(-INFINITY, head_curr->level + 1, nullptr, nullptr, head_curr);
+      head_curr->up->next = new Node(INFINITY, head_curr->up->level, nullptr, nullptr, head_curr->next);
+      head_curr = head_curr->up;
+      header[head_curr->level] = head_curr;
     }
 
     head = header[LEVEL_HEIGHT_MAX-1];
   }
 
-
   void SkipList::insert(const int key) {
 
-    const u_int64 tosses = distribution(generator);
-    u_int64 levels = std::countr_one(tosses); // coin tosses
+    const u_int64 coin_tosses = distribution(generator); // acts like 64 coin tosses.
+    const u_int64 levels = std::countr_zero(coin_tosses); // count the l leading contiguous 0(heads)
 
     // search
     Node* cursor_curr = head;
-    Node* cursor_prev = cursor_curr;
 
     while (true) {
 
-      bool is_end = (cursor_curr->down == nullptr && cursor_curr->next == nullptr);
-
-      // insertion point found
-      if (cursor_curr->key >= key || is_end) {
-        cursor_curr = cursor_prev;
-        break;
-      }
-
       // end of level
-      if (cursor_curr->next == nullptr) {
+      if ((cursor_curr->next == nullptr | cursor_curr->next->key == INFINITY) && cursor_curr->down != nullptr) {
         cursor_curr = cursor_curr->down;
-        continue;
       }
-
-      if (cursor_curr->next->key > key) {
-        cursor_curr = cursor_curr->down;
+      // insertion point found
+      else if (cursor_curr->next->key > key) {
+        break;
       }
       else {
         cursor_curr = cursor_curr->next;
       }
 
-      cursor_prev = cursor_curr;
     }
 
     // go to level 0
@@ -80,18 +77,15 @@ namespace apal {
       cursor_curr = cursor_curr->down;
     }
 
-    // insert, from head, promote inserted node from level 0
+    // insert at level 0
     cursor_curr->next = new Node(key, 0, cursor_curr->next, nullptr, nullptr);
     Node* inserted_node = cursor_curr->next;
 
+    // promote new key to every level from header
     for (int i = 1; i < levels; i++) {
-      cursor_curr = header[i];
 
-      while (cursor_curr->next != nullptr) {
-        if (cursor_curr->key >= key) {
-          cursor_curr = cursor_prev;
-          break;
-        }
+      cursor_curr = header[i];
+      while (!(cursor_curr->next->key > key)) {
         cursor_curr = cursor_curr->next;
       }
 
@@ -110,7 +104,7 @@ namespace apal {
 
   int SkipList::get_size() const { return this->size; }
 
-  void SkipList::print() const {
+  void SkipList::print_full() const {
     if (header[0]->next == nullptr) {
       return;
     }
@@ -132,17 +126,36 @@ namespace apal {
     }
 
     for (int i = max_level; i >= 0; i--) {
-      std::cout << 'h' << i << " | ";
+      int padding = 6;
+      std::cout << std::setw(padding) <<'h';
+      std::cout << " | ";
       for (int j = 0; j < size; j++) {
+
         if (std::get<1>(data[j]) - i >= 0) {
-          std::cout << std::get<0>(data[j]) << "  ";
+          std::cout << std::setw(padding) <<  std::get<0>(data[j]);
         }
         else {
-          std::cout << "   ";
+          std::cout << std::setw(padding) << ' ';
         }
       }
       std::cout << '\n';
     }
+  }
+
+  void SkipList::print() const {
+    for (auto curr = header[0]; curr != nullptr;) {
+      std::cout << curr->key << ", ";
+      curr = curr->next;
+    }
+    std::cout << '\n';
+  }
+
+  void SkipList::print_level(const int i) const {
+    for (auto curr = header[i]; curr != nullptr;) {
+      std::cout << curr->key << ", ";
+      curr = curr->next;
+    }
+    std::cout << '\n';
   }
 
 } // apal
