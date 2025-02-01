@@ -11,9 +11,9 @@
 
 namespace apal {
 
-  SkipList::Node::Node(const int key, const int level, Node* next, Node* up,
+  SkipList::Node::Node(const int key, Node* next, Node* up,
                      Node* down)
-    : key(key), level(level), next(next), up(up), down(down) {}
+    : key(key), next(next), up(up), down(down) {}
 
   SkipList::SkipList()
   : size(0), distribution(0, std::numeric_limits<RANDOM_INT_TYPE>::max()) {
@@ -34,15 +34,15 @@ namespace apal {
   void SkipList::init_header() {
     header = std::vector<Node*>(LEVEL_HEIGHT_MAX);
 
-    auto head_curr = new Node(-INFINITY, 0, nullptr, nullptr, nullptr);
-    head_curr->next = new Node(INFINITY, head_curr->level, nullptr, nullptr, nullptr);
-    header[head_curr->level] = head_curr;
+    auto head_curr = new Node(NEG_INF, nullptr, nullptr, nullptr);
+    head_curr->next = new Node(INF, nullptr, nullptr, nullptr);
+    header[0] = head_curr;
 
-    while (head_curr->level < LEVEL_HEIGHT_MAX-1) {
-      head_curr->up = new Node(-INFINITY, head_curr->level + 1, nullptr, nullptr, head_curr);
-      head_curr->up->next = new Node(INFINITY, head_curr->up->level, nullptr, nullptr, head_curr->next);
+    for (int i = 1; i < LEVEL_HEIGHT_MAX; i++) {
+      head_curr->up = new Node(NEG_INF, nullptr, nullptr, head_curr);
+      head_curr->up->next = new Node(INF, nullptr, nullptr, head_curr->next);
       head_curr = head_curr->up;
-      header[head_curr->level] = head_curr;
+      header[i] = head_curr;
     }
 
     head = header[LEVEL_HEIGHT_MAX-1];
@@ -50,26 +50,28 @@ namespace apal {
 
   void SkipList::insert(const int key) {
 
-    const u_int64 coin_tosses = distribution(generator); // acts like 64 coin tosses.
-    const u_int64 levels = std::countr_zero(coin_tosses); // count the l leading contiguous 0(heads)
+    const RANDOM_INT_TYPE coin_tosses = distribution(generator); // acts like many tosses.
+    const RANDOM_INT_TYPE levels = std::countr_zero(coin_tosses); // count the l leading contiguous 0(heads)
 
     // search
     Node* cursor_curr = head;
 
     while (true) {
 
-      // end of level
-      if ((cursor_curr->next == nullptr | cursor_curr->next->key == INFINITY) && cursor_curr->down != nullptr) {
+      // no more on this level, go down.
+      if ((cursor_curr->next == nullptr || cursor_curr->next->key == INF) && cursor_curr->down != nullptr) {
         cursor_curr = cursor_curr->down;
       }
-      // insertion point found
       else if (cursor_curr->next->key > key) {
-        break;
+        if (cursor_curr->down != nullptr) {
+          cursor_curr = cursor_curr->down;
+        } else {
+          break;
+        }
       }
       else {
         cursor_curr = cursor_curr->next;
       }
-
     }
 
     // go to level 0
@@ -78,7 +80,7 @@ namespace apal {
     }
 
     // insert at level 0
-    cursor_curr->next = new Node(key, 0, cursor_curr->next, nullptr, nullptr);
+    cursor_curr->next = new Node(key, cursor_curr->next, nullptr, nullptr);
     Node* inserted_node = cursor_curr->next;
 
     // promote new key to every level from header
@@ -89,7 +91,7 @@ namespace apal {
         cursor_curr = cursor_curr->next;
       }
 
-      cursor_curr->next = new Node(key, i, cursor_curr->next, nullptr, inserted_node);
+      cursor_curr->next = new Node(key, cursor_curr->next, nullptr, inserted_node);
       inserted_node->up = cursor_curr->next;
       inserted_node = cursor_curr->next;
     }
@@ -111,21 +113,20 @@ namespace apal {
 
     std::vector<std::tuple<int, int>> data;
 
-    int max_level = 0;
     auto level_0_curr = header[0]->next;
 
     for (int i = 0; i < size; i++) {
       auto curr = level_0_curr;
-
+      auto level = 0;
       while (curr->up != nullptr) {
         curr = curr->up;
+        level++;
       }
-      data.push_back(std::make_tuple(curr->key, curr->level));
-      max_level = std::max(max_level, curr->level);
+      data.push_back(std::make_tuple(curr->key, level));
       level_0_curr = level_0_curr->next;
     }
 
-    for (int i = max_level; i >= 0; i--) {
+    for (int i = LEVEL_HEIGHT_MAX; i >= 0; i--) {
       int padding = 6;
       std::cout << std::setw(padding) <<'h';
       std::cout << " | ";

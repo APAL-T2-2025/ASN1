@@ -2,14 +2,14 @@
 #ifndef SKIP_LIST_H
 #define SKIP_LIST_H
 
-#define RANDOM_INT_TYPE std::uint16_t
+#define RANDOM_INT_TYPE std::uint32_t
 #define LEVEL_HEIGHT_MAX sizeof(RANDOM_INT_TYPE) * CHAR_BIT
-#define INFINITY INT16_MAX
+#define INF INT32_MAX
+#define NEG_INF INT32_MIN
 
 #include <random>
 
 namespace apal {
-
 
 class SkipList {
   public:
@@ -29,13 +29,12 @@ class SkipList {
     inline void init_header();
 
     struct Node {
-      int key;
-      const int level;
+      uint64_t key;
       Node* next;
       Node* up;
       Node* down;
 
-      Node(int key, int level, Node *next, Node *up, Node *down);
+      Node(int key, Node *next, Node *up, Node *down);
     };
 
     int size;

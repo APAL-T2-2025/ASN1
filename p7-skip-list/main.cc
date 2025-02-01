@@ -1,49 +1,41 @@
 #include <nanobench.h>
 
+#include <algorithm>
 #include <iostream>
-
+#include <random>
+#include <vector>
 
 #include "apal/skip_list.h"
 
-void benchmark(bool viz);
-void print_benchmark();
 
 int main() {
-  // ankerl::nanobench::Bench b;
-  // b.unit("uint64_t")
-  //   .warmup(100)
-  //   .relative(true)
-  //   .minEpochIterations(700)
-  //   .doNotOptimizeAway(benchmark)
-  //   .performanceCounters(true);
-  //
-  // b.run("Skip List Benchmark", [&] {benchmark(false);});
-  // std::cout << b.complexityBigO() << std::endl;
+  ankerl::nanobench::Bench bench;
+  bench.unit("op").warmup(100).minEpochIterations(11003).relative(true).performanceCounters(true);
 
-  benchmark(true);
+  const std::vector<int> test_sizes = {10, 100, 1000};
 
-}
+  for (int n : test_sizes) {
 
-void benchmark(const bool viz) {
-  using namespace apal;
-  auto sl = SkipList();
-  std::cout << LEVEL_HEIGHT_MAX << '\n';
+    // Test Cases
+    std::vector<int> keys(n);
+    std::iota(keys.begin(), keys.end(), 0);
+    std::shuffle(keys.begin(), keys.end(), std::mt19937{std::random_device{}()});
 
-  auto keys =
-    {215, 43, 88, 252, 71, 89, 259, 234, 9, 4};
 
-  for (const auto k : keys) {
-    sl.insert(k);
-    std::cout << '\n';
-    sl.print_level(1);
-    sl.print_level(0);
+    // Benchmark insertion
+    bench.batch(n).run("Insert " + std::to_string(n), [&] {
+      apal::SkipList sl = apal::SkipList();
+      for (int k : keys) {
+          sl.insert(k);
+      }
+      // ankerl::nanobench::doNotOptimizeAway(sl);
+    });
 
+
+    // sl.print_full();
   }
 
-  // if (viz) {
-  //   std::cout << '\n';
-  //   // sl.print();/
-  //   sl.print_full();
-  // }
+
 }
+
 
