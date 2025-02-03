@@ -1,21 +1,20 @@
 #pragma once
-#ifndef SKIP_LIST_H
-#define SKIP_LIST_H
 
-#define RANDOM_INT_TYPE std::uint32_t
+#include <random>
+#include "skip_list_node.h"
+
+#define RANDOM_INT_TYPE std::uint16_t
 #define LEVEL_HEIGHT_MAX sizeof(RANDOM_INT_TYPE) * CHAR_BIT
 #define INF INT32_MAX
 #define NEG_INF INT32_MIN
 
-#include <random>
 
 namespace apal {
-
-class SkipList {
+  class SkipList {
   public:
 
-   SkipList();
-   ~SkipList();
+    SkipList();
+    ~SkipList();
 
     void insert(int key);
     void remove(int key);
@@ -25,24 +24,15 @@ class SkipList {
     void print() const;
     void print_level(int i) const;
 
-   private:
+  private:
     inline void init_header();
 
-    struct Node {
-      uint64_t key;
-      Node* next;
-      Node* up;
-      Node* down;
-
-      Node(int key, Node *next, Node *up, Node *down);
-    };
-
     int size;
-    Node* head;
-    std::vector<Node*> header;
+    SkipListNode* head;
+    std::vector<SkipListNode*> header;
 
     std::mt19937_64 generator;
-    std::uniform_int_distribution<RANDOM_INT_TYPE> distribution;
+    std::uniform_int_distribution<uint32_t> distribution;
   };
 
 } // apal
