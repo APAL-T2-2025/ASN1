@@ -1,40 +1,50 @@
 #pragma once
 
 #include <random>
+#include <iterator>
+
 #include "skip_list_node.h"
 
 #define RANDOM_INT_TYPE std::uint16_t
-#define LEVEL_HEIGHT_MAX sizeof(RANDOM_INT_TYPE) * CHAR_BIT
-#define INF INT32_MAX
-#define NEG_INF INT32_MIN
-
 
 namespace apal {
+
+  template <typename T, typename Comparator = std::less<T>>
   class SkipList {
   public:
 
-    SkipList();
+    explicit SkipList(unsigned int level_max, Comparator comp = Comprator());
+    
     ~SkipList();
 
-    void insert(int key);
-    void remove(int key);
-    [[nodiscard]] int search(int key) const;
-    [[nodiscard]] int get_size() const;
+    bool insert(const T& key);
+    bool remove(const T& key);
+    bool contains(const T& key) const;
+    [[nodiscard]] bool size() const;
+
     void print_full() const;
-    void print() const;
-    void print_level(int i) const;
+
+    class iterator;
+    iterator begin();
+    iterator end();
+
+    class const const_iterator;
+    const_iterator begin() const;
+    const_iterator end() const;
 
   private:
-    inline void init_header();
 
-    int size;
-    SkipListNode* head;
-    std::vector<SkipListNode*> header;
+    const unsigned int max_level;
+    unsigned int count;
+    SkipListNode<T>* head;
+
+    Compare comp;
 
     std::mt19937_64 generator;
     std::uniform_int_distribution<uint32_t> distribution;
+
+    inline unsigned int random_level();
   };
 
 } // apal
 
-#endif //SKIP_LIST_H
