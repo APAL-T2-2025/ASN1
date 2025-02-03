@@ -34,11 +34,12 @@ namespace apal {
 
   private:
 
-    const unsigned int max_level;
+    const unsigned int level_max;
+    const unsigned int level;
     unsigned int count;
     SkipListNode<T>* head;
 
-    Compare comp;
+    Comparator comp;
 
     std::mt19937_64 generator;
     std::uniform_int_distribution<uint32_t> distribution;

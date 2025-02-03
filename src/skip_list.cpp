@@ -9,47 +9,81 @@
 #include <random>
 #include <tuple>
 
-// #define STATIC_SEED 27
 
 namespace apal {
 
-  SkipList::Node::Node(const int key, Node* next, Node* up, Node* down)
-    : key(key), next(next), up(up), down(down) {}
+  template <typename T, typename Comparator>
+  SkipList<T, Comparator>::SkipList(unsigned int level_max, Comparator comp)
+    : size(0),
+    level(0),
+    count(0),
+    level_max(level_max),
+    comp(comp) {
 
-  SkipList::SkipList() : size(0) {
-    // set seed
     distribution = std::uniform_int_distribution<uint32_t>(0, UINT16_MAX);
-#ifdef STATIC_SEED
+
+    // set seed
+#ifdef DEBUG_STATIC_SEED
     generator.seed(STATIC_SEED);
 #else
     generator.seed(std::chrono::system_clock::now().time_since_epoch().count());
 #endif
-
-    // create header and initialize -INFINITE and INFINITE
-    init_header();
   }
 
   SkipList::~SkipList() {
-    for (int i = 0; i < LEVEL_HEIGHT_MAX; i++) {
-      Node* current = header[i];
-      while (current) {
-        Node* temp = current;
-        current = current->next;
-        delete temp;
-      }
+    clear();
+    delete head;
+  }
+
+
+  template<typename T, typename Comparator>
+  bool SkipList<T, Comparator>::contains(const T& key) const
+  {
+    return false;
+  }
+
+  template<typename T, typename Comparator>
+  bool SkipList<T, Comparator>::insert(const T& key)
+  {
+    return false;
+  }
+
+  template<typename T, typename Comparator>
+  bool SkipList<T, Comparator>::remove(const T& key)
+  {
+    return false;
+  }
+
+  template<typename T, typename Comparator>
+  void SkipList::clear() {
+    SkipListNode<T>* node = head->forward[0];
+    while (node) {
+      SkipListNode<T>* next = node->forward[0];
+      delete node;
+      node = next;
     }
+    for (int i = 0; i <= level_max; i++)
+      head->forward[i] = nullptr;
+    level = 0;
+    count = 0;
+  }
+
+  template<typename T, typename Comparator>
+  bool SkipList<T, Comparator>::size() const
+  {
+    return false;
   }
 
   void SkipList::init_header() {
-    header = std::vector<Node*>(LEVEL_HEIGHT_MAX);
+    header = std::vector<SkipListNode*>(LEVEL_HEIGHT_MAX);
 
-    auto head_curr = new Node(NEG_INF, nullptr, nullptr, nullptr);
-    head_curr->next = new Node(INF, nullptr, nullptr, nullptr);
+    auto head_curr = new SkipListNode(NEG_INF, nullptr, nullptr, nullptr);
+    head_curr->next = new SkipListNode(INF, nullptr, nullptr, nullptr);
     header[0] = head_curr;
 
     for (int i = 1; i < LEVEL_HEIGHT_MAX; i++) {
-      head_curr->up = new Node(NEG_INF, nullptr, nullptr, head_curr);
-      head_curr->up->next = new Node(INF, nullptr, nullptr, head_curr->next);
+      head_curr->up = new SkipListNode(NEG_INF, nullptr, nullptr, head_curr);
+      head_curr->up->next = new SkipListNode(INF, nullptr, nullptr, head_curr->next);
       head_curr = head_curr->up;
       header[i] = head_curr;
     }
@@ -64,7 +98,7 @@ namespace apal {
       __lzcnt16(coin_tosses);  // count the l leading contiguous 0(heads)
 
     // search
-    Node* cursor_curr = head;
+    SkipListNode* cursor_curr = head;
 
     while (true) {
       // no more on this level, go down.
@@ -91,8 +125,8 @@ namespace apal {
     }
 
     // insert at level 0
-    cursor_curr->next = new Node(key, cursor_curr->next, nullptr, nullptr);
-    Node* inserted_node = cursor_curr->next;
+    cursor_curr->next = new SkipListNode(key, cursor_curr->next, nullptr, nullptr);
+    SkipListNode* inserted_node = cursor_curr->next;
 
     // promote new key to every level from header
     for (int i = 1; i < levels; i++) {
@@ -102,7 +136,7 @@ namespace apal {
       }
 
       cursor_curr->next =
-        new Node(key, cursor_curr->next, nullptr, inserted_node);
+        new SkipListNode(key, cursor_curr->next, nullptr, inserted_node);
       inserted_node->up = cursor_curr->next;
       inserted_node = cursor_curr->next;
     }
