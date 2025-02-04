@@ -1,13 +1,11 @@
 #pragma once
 #include <vector>
 
-
 namespace apal {
-  template <typename T>
   struct SkipListNode {
-    T key;
-    std::vector<SkipListNode> next;
+    uint64_t key;
+    std::vector<SkipListNode*> next;
 
-    SkipListNode(T key, unsigned int level);
+    SkipListNode(uint64_t key, uint32_t level);
   };
 }

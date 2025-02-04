@@ -161,9 +161,11 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\skip_list.cpp" />
+    <ClCompile Include="src\skip_list_node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\skip_list.h" />
+    <ClInclude Include="src\skip_list_node.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

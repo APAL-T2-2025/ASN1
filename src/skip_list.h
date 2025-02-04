@@ -2,6 +2,7 @@
 
 #include <random>
 #include <iterator>
+#include <type_traits>
 
 #include "skip_list_node.h"
 
@@ -9,40 +10,40 @@
 
 namespace apal {
 
-  template <typename T, typename Comparator = std::less<T>>
   class SkipList {
   public:
 
-    explicit SkipList(unsigned int level_max, Comparator comp = Comprator());
+    SkipList(uint32_t level_max = 20);
     
     ~SkipList();
 
-    bool insert(const T& key);
-    bool remove(const T& key);
-    bool contains(const T& key) const;
-    [[nodiscard]] bool size() const;
+    bool insert(uint64_t key);
+    bool remove(uint64_t key);
+    bool contains(uint64_t key) const;
+    void clear();
+    [[nodiscard]] size_t size() const;
 
     void print_full() const;
 
-    class iterator;
-    iterator begin();
-    iterator end();
-
-    class const const_iterator;
-    const_iterator begin() const;
-    const_iterator end() const;
+//     class iterator;
+//     iterator begin();
+//     iterator end();
+// 
+//     class const const_iterator;
+//     const_iterator begin() const;
+//     const_iterator end() const;
 
   private:
 
-    const unsigned int level_max;
-    const unsigned int level;
-    unsigned int count;
-    SkipListNode<T>* head;
+    uint32_t  m_level_max;
+    uint32_t m_level;
+    size_t m_size;
 
-    Comparator comp;
+    SkipListNode* m_head;
+    SkipListNode* m_null;
 
-    std::mt19937_64 generator;
-    std::uniform_int_distribution<uint32_t> distribution;
+    std::mt19937 m_generator;
+    std::uniform_int_distribution<uint32_t> m_distribution;
 
     inline unsigned int random_level();
   };

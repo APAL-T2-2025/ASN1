@@ -2,10 +2,9 @@
 
 namespace apal {
 
-  template <typename T>
-  SkipListNode<T>::SkipListNode(T key, unsigned int level)
+  SkipListNode::SkipListNode(uint64_t key, const uint32_t level)
     : key(key),
-    level(level + 1)
-  {}
+    next(std::vector<SkipListNode*>(level)) {
+  }
 }
 
