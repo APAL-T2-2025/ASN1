@@ -32,5 +32,11 @@
     <ClInclude Include="src\skip_list_node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="includes\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\nanobench.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

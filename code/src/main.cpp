@@ -9,7 +9,9 @@ int main() {
 
   int n = 1000;
 
-  std::ofstream fileOut("output.txt");
+  std::ofstream fileOut("output\coin_flips.txt");
+//   std::ofstream fileOut("output\count_leading_zeros.txt");
+
   std::cout.rdbuf(fileOut.rdbuf());
 
 

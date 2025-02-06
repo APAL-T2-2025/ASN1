@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0afb60ce-3599-4986-8e29-dd1fa7638b69}</ProjectGuid>
-    <RootNamespace>algoasnskiplist</RootNamespace>
+    <ProjectGuid>{172a88c9-472c-461e-ae0a-f16b0da6dd93}</ProjectGuid>
+    <RootNamespace>btree</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -76,9 +76,9 @@
     <PublicIncludeDirectories>D:\dev\ASN1\project\algo-asn-skip-list\includes;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Configuration)\intermediate</IntDir>
-    <PublicIncludeDirectories>D:\dev\ASN1\project\algo-asn-skip-list\includes;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <OutDir>$(MSBuildProjectDirectory)\build\$(Configuration)\</OutDir>
+    <IntDir>$(MSBuildProjectDirectory)\build\$(Configuration)\intermediate\</IntDir>
+    <PublicIncludeDirectories>$(SolutionDir)includes\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
@@ -86,9 +86,12 @@
     <PublicIncludeDirectories>D:\dev\ASN1\project\algo-asn-skip-list\includes;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Configuration)\intermediate</IntDir>
-    <PublicIncludeDirectories>D:\dev\ASN1\project\algo-asn-skip-list\includes;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <OutDir>$(MSBuildProjectDirectory)\build\$(Configuration)\</OutDir>
+    <IntDir>$(MSBuildProjectDirectory)\build\$(Configuration)\intermediate\</IntDir>
+    <PublicIncludeDirectories>$(SolutionDir)includes\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,6 +118,8 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +154,8 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,12 +167,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\skip_list.cpp" />
-    <ClCompile Include="src\skip_list_node.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\skip_list.h" />
-    <ClInclude Include="src\skip_list_node.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

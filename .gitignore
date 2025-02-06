@@ -1,7 +1,2 @@
-﻿p7-skip-list/cmake-build-debug
-p7-skip-list/.idea
-p7-skip-list/cmake-build-release
-.vs
-lib
-p7-skip-list/out
-build
+﻿code/Intel® VTune™ Profiler Results
+code/vcpkg_installed

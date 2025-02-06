@@ -1,0 +1,5 @@
+coin_flip_count_leading
+Duration: 5456\ns (5.456ms)
+
+coin_flip_for_real
+Duration: 51337\ns (51.337ms)
