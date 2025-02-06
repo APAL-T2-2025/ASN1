@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1738832464.07708 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1738832465.11568 0
+["pdflatex"] 1738840003.47964 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1738840004.39664 0
   "C:/Users/Austi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1738825724 591513 326774de7b93dc3b6284af4d6d1bca05 ""
   "C:/Users/Austi/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1726789021 24225046 a71ecc3afb434c0f002e67a0218cb2d6 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -62,9 +62,9 @@
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1704400941 30006 57b07afb710ee2f649c65cfbafda39c1 ""
   "Q8_a.drawio.pdf" 1738751242 21952 9d11b67f0a038f05a6969f8093540557 ""
   "Q8_b.drawio.pdf" 1738751223 21860 c7f03e22dbc7e620052c8cf77ed3209f ""
-  "d:/dev/ASN1/tex/hw1.tex" 1738832462 4148 e5d0fa704f01d4ca14d2fe33d52c211f ""
-  "hw1.aux" 1738832464 462 6d040220bbcf80e6582afef9b8072aec "pdflatex"
-  "hw1.tex" 1738832462 4148 e5d0fa704f01d4ca14d2fe33d52c211f ""
+  "d:/dev/ASN1/tex/hw1.tex" 1738840002 4143 0ab0adc7c820da12762e3740dda12188 ""
+  "hw1.aux" 1738840004 462 6d040220bbcf80e6582afef9b8072aec "pdflatex"
+  "hw1.tex" 1738840002 4143 0ab0adc7c820da12762e3740dda12188 ""
   (generated)
   "hw1.aux"
   "hw1.log"
