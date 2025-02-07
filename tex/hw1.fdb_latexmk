@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1738956912.58014 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1738956913.42835 0
+["pdflatex"] 1738964457.44252 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1738964458.22683 0
   "../notebook/coin_flips_for_real.pdf" 1738956440 244000 011ed24223eaa7c951e9ef43377772cc ""
-  "../notebook/comparison_of_distributions.pdf" 1738956444 244508 9bc267ed73e03719d9f8490df880e9e1 ""
+  "../notebook/comparison_of_distributions.pdf" 1738964456 244808 43c8b2b61c4d874d693ddb9ac3b85745 ""
   "../notebook/count_leading_0s_of_random_uint_32.pdf" 1738956442 244052 fbe4262da6be476b2014a5f5085d2dd3 ""
   "C:/Users/Austi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1738825724 591513 326774de7b93dc3b6284af4d6d1bca05 ""
   "C:/Users/Austi/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1726789021 24225046 a71ecc3afb434c0f002e67a0218cb2d6 ""
@@ -81,7 +81,7 @@
   "Q8_a.drawio.pdf" 1738751242 21952 9d11b67f0a038f05a6969f8093540557 ""
   "Q8_b.drawio.pdf" 1738751223 21860 c7f03e22dbc7e620052c8cf77ed3209f ""
   "d:/dev/ASN1/tex/hw1.tex" 1738956911 7583 fb11869e0465faa89e1e7396146922df ""
-  "hw1.aux" 1738956913 826 1dfd8cc0dd4deaa878a18150470cd442 "pdflatex"
+  "hw1.aux" 1738964458 826 1dfd8cc0dd4deaa878a18150470cd442 "pdflatex"
   "hw1.tex" 1738956911 7583 fb11869e0465faa89e1e7396146922df ""
   (generated)
   "hw1.aux"

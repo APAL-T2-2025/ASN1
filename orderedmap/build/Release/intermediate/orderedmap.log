@@ -1,0 +1,1 @@
+﻿C:\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets(128,5): error : The vcpkg manifest was enabled, but we couldn't find a manifest file (vcpkg.json) in any directories above D:\dev\ASN1\orderedmap. Please add a manifest, disable manifests in your properties page, or pass /p:VcpkgEnableManifest=false.

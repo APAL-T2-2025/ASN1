@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{172a88c9-472c-461e-ae0a-f16b0da6dd93}</ProjectGuid>
-    <RootNamespace>btree</RootNamespace>
+    <ProjectGuid>{4898c376-7440-4e20-921a-fd4ebbc2d4e8}</ProjectGuid>
+    <RootNamespace>orederdmap</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -167,7 +167,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\bench_over_n.cpp" />
-    <ClCompile Include="src\bench_over_b.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
