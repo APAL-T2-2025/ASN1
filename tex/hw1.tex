@@ -58,16 +58,54 @@
 	
 	
 	\subsection*{Problem 2. Chernoff-Hoeffding With Bounds}
-	(Statement of problem goes here.)\\
+	2.1)
+	\begin{align*}
+		\mathrm{Pr}[X &> (1+\beta)\mu]\leq\exp\left(-\frac{\beta^{2}}{2+\beta}\mu H\right) \\
+		\mathrm{Pr}[X &> (1+\varepsilon)\mu H]\leq\exp\left(-\frac{\varepsilon^{2}}{2+\varepsilon}\mu H\right)
+	\end{align*}
 
 	\begin{align*}
-		\mathrm{Pr}[X > (1+\varepsilon)\mu H]\leq\exp\left(-\frac{\varepsilon^{2}}{2+\varepsilon}\mu H\right)
+		(1 + \epsilon) \mu_{H} &= (1 + \beta) \mu \\
+		\frac{\mu_{H}}{\mu} &= \frac{1 + \epsilon}{1 + \beta}\\
+		% \beta $= \frac{\mu_{H}(1 + \epsilon)}{\mu}\\
+	\end{align*}
+
+
+	2.2)
+	\begin{align*}
+		\mathrm{Pr}[X &> (1+\beta)\mu]\leq\exp\left(-\frac{\beta^{2}}{2+\beta}\mu H\right) \\
+		\mathrm{Pr}[X &> (1+\varepsilon)\mu H]\leq\exp\left(-\frac{\varepsilon^{2}}{2+\varepsilon}\mu H\right)
+	\end{align*}
+
+	\begin{align*}
+		(1 + \epsilon) \mu_{H} &= (1 + \beta) \mu \\
+		\frac{\mu_{H}}{\mu} &= \frac{1 + \epsilon}{1 + \beta}\\
+		% \beta $= \frac{\mu_{H}(1 + \epsilon)}{\mu}\\
+	\end{align*}
+
+	2.3)
+	\begin{align*}
+		\mathrm{Pr}[X &> (1+\beta)\mu]\leq\exp\left(-\frac{\beta^{2}}{2+\beta}\mu H\right) \\
+		\mathrm{Pr}[X &> (1+\varepsilon)\mu H]\leq\exp\left(-\frac{\varepsilon^{2}}{2+\varepsilon}\mu H\right)
+	\end{align*}
+
+	\begin{align*}
+		(1 + \epsilon) \mu_{H} &= (1 + \beta) \mu \\
+		\frac{\mu_{H}}{\mu} &= \frac{1 + \epsilon}{1 + \beta}\\
+		% \beta $= \frac{\mu_{H}(1 + \epsilon)}{\mu}\\
 	\end{align*}
 	
-	\begin{proof}
-		(Type your proof here.)
-	\end{proof}
-	
+	2.4)
+	\begin{align*}
+		\mathrm{Pr}[X &> (1+\beta)\mu]\leq\exp\left(-\frac{\beta^{2}}{2+\beta}\mu H\right) \\
+		\mathrm{Pr}[X &> (1+\varepsilon)\mu H]\leq\exp\left(-\frac{\varepsilon^{2}}{2+\varepsilon}\mu H\right)
+	\end{align*}
+
+	\begin{align*}
+		(1 + \epsilon) \mu_{H} &= (1 + \beta) \mu \\
+		\frac{\mu_{H}}{\mu} &= \frac{1 + \epsilon}{1 + \beta}\\
+		% \beta $= \frac{\mu_{H}(1 + \epsilon)}{\mu}\\
+	\end{align*}
 	\vspace{2in} %Leave space for comments!
 	
 	
@@ -113,19 +151,70 @@
 	
 	
 	\subsection*{Problem 7. Skip List}
+	\vspace{20pt}
+	\subsubsection*{Experimental Setup}
+	Conducted our benchmarks using Google Benchmark on a system with the following hardware specifications:
+
+\begin{itemize}
+    \item \textbf{Processor}: 11th Gen Intel(R) Core(TM) i7-11370H 8-core CPU @ 3.3 GHz
+    \item \textbf{Cache Hierarchy}:
+    \begin{itemize}
+        \item L1 Data: 48 KiB per core (\(\times 4\))
+        \item L1 Instruction: 32 KiB per core (\(\times 4\))
+        \item L2 Unified: 1280 KiB per core (\(\times 4\))
+        \item L3 Unified: 12,288 KiB (shared)
+    \end{itemize}
+\end{itemize}
+
+All benchmarks were compiled using \texttt{-Ox} optimization level with \texttt{MSVC} (version 19.42.34436) and executed in a single-threaded environment to minimize external interference.
+
+\subsubsection*{Questions And Experiments}
 	
-	a.) Questions to experiment:\\
+Q1.) Can we perform count coin tosses differently and is the alternative better?
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/coin_flips_for_real.pdf}
+		\label{fig:coin_flips_for_real}
+	\end{minipage}\hfill
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/count_leading_0s_of_random_uint_32.pdf}
+		\label{fig:coin_flips_count_leading}
+	\end{minipage}\hfill
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/comparison_of_distributions.pdf}
+		\label{fig:coin_flips_comparison}
+	\end{minipage}
+\end{figure}
+
+
+\begin{table}[h]
+	\centering
+	\small
+	\begin{tabular}{lrrr}
+		\hline
+		\textbf{Benchmark} & \textbf{Time (ns)} & \textbf{CPU (ns)} & \textbf{Iterations} \\
+		\hline
+		Coin Flip For Real & 29.8 & 29.3 & 22,400,000 \\
+		\hline
+		Coin Flip Count Leading 0s & 5.11 & 4.87 & 144,516,129 \\
+	\end{tabular}
+	\caption{Benchmark results comparing different coin flip implementations.}
+	\label{tab:benchmark_results}
+\end{table}
+
+Q2.) How does varying max height change performance?
+
+Q3.) Linked lists are known to be cache unfriendly, is there a way we can modify 
+
+Q4.) How does it perform against a reputable ordered map?
+\\\\
 	
-	Q1.) Can we compute count coin tosses differently and is the alternative better?
-	
-	Q2.) How does varying max height change performance?
-	
-	Q3.) Linked lists are known to be cache unfriendly, is there a way we can modify 
-	
-	Q3.) How does it perform against a reputable ordered map?
-	\\\\
-	
-	b.) Search algorithm of Skip List when start is at the bottom left corner in $O(\log(d))$ where d is the number of elements smaller than the key?
+b.) Search algorithm of Skip List when start is at the bottom left corner in $O(\log(d))$ where d is the number of elements smaller than the key?
 	
 
 	
