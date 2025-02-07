@@ -1,54 +1,90 @@
-#include <random>
-#include <vector>
-#include <algorithm>
-#include <numeric>
-#include <tuple>
+#include "fc/btree.h"
+#include <iostream>
+#include <string>
+
+#include <windows.h>
+#include <psapi.h>
 
 #include <benchmark/benchmark.h>
-#include <tlx/container/btree.hpp> 
+#include <map>
+#include <utility>
+#include <gflags/gflags.h>
 
-template <size_t B>
-struct MyBTreeTraits : public tlx::btree_default_traits<int, int> {
-  static const size_t leaf_slotmax = B;
-  static const size_t inner_slotmax = B * 2;
-};
+static void CustomArgs(benchmark::internal::Benchmark* bench) {
 
-struct SelectFirst {
-  int operator()(const std::pair<int, int>& value) const {
-    return value.first;
-  }
-};
+  int param_b[] = { 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024 };
+  int param_n[] = { 10E6, 20E6, 40E6, 80E6, 160E6 };
 
-template <size_t B>
-static void BM_BTreeInsert(benchmark::State& state) {
-  tlx::BTree<
-    int,
-    int,
-    SelectFirst<std::pair<int, int>>, 
-    std::less<int>,                  
-    MyBTreeTraits<B>                 
-  > btree;
-
-  std::vector<int> data(state.range(0));
-  std::iota(data.begin(), data.end(), 0);
-  std::random_device rd;
-  std::mt19937 g(rd());
-  std::shuffle(data.begin(), data.end(), g);
-
-  for (auto _ : state) {
-    for (int key : data) {
-      btree.insert(std::make_pair(key, key));
+  for (int b : param_b) {
+    for (int n : param_n) {
+      bench->Args({ b, n });
     }
   }
-  state.SetItemsProcessed(state.range(0));
 }
 
-#define REGISTER_BENCHMARK(B) \
-    BENCHMARK_TEMPLATE(BM_BTreeInsert, B)->Arg(100000);
+inline static size_t GetMemRam() {
+  PROCESS_MEMORY_COUNTERS memInfo;
+  if (GetProcessMemoryInfo(GetCurrentProcess(), &memInfo, sizeof(memInfo))) {
+    return memInfo.QuotaPeakPagedPoolUsage; // KB
+  }
+  return -1;
+}
 
-REGISTER_BENCHMARK(16);
-REGISTER_BENCHMARK(32);
-REGISTER_BENCHMARK(64);
-REGISTER_BENCHMARK(128);
+inline static size_t GetMemPagefile() {
+  PROCESS_MEMORY_COUNTERS memInfo;
+  if (GetProcessMemoryInfo(GetCurrentProcess(), &memInfo, sizeof(memInfo))) {
+    return memInfo.QuotaPeakNonPagedPoolUsage; // KB
+  }
+  return -1;
+}
 
-BENCHMARK_MAIN();
+static void BM_MapInsertion(benchmark::State& state) {
+
+  int memRamBefore = GetMemRam();
+  int memPageBefore = GetMemPagefile();
+
+  namespace fc = frozenca;
+  fc::BTreeSet<int> btree;
+
+  for (auto _ : state) {
+    for (int i = 0; i < state.range(0); i++) {
+      btree.insert(i);
+    }
+    benchmark::DoNotOptimize(btree);
+  }
+
+  int memRamAfter = GetMemRam();
+  int memPageAfter = GetMemPagefile();
+
+  int memRamUsed = memRamAfter;
+  int memPageUsed = memPageAfter;
+
+  state.counters["Memory_RAM_Used"] = memPageUsed;
+  state.counters["Memory_Pagefile_Used"] = memPageUsed;
+}
+BENCHMARK(BM_MapInsertion)->Apply(CustomArgs);
+
+DEFINE_string(benchmark_out, "results.json", "Output file for benchmark results");
+DEFINE_string(benchmark_out_format, "json", "Format of benchmark results output");
+
+int main(int argc, char** argv) {
+  benchmark::Initialize(&argc, argv);
+
+  benchmark::AddCustomContext("Memory_Unit", "KB");
+
+  return benchmark::RunSpecifiedBenchmarks();
+
+  //std::cout << GetMemPagefile() << std::endl;
+  //std::cout << GetMemRam() << std::endl;
+
+
+  //std::vector<int> map;
+
+
+  //for (int i = 0; i < 10000; i++)
+  //  map.push_back(i);
+
+  //std::cout << GetMemPagefile() << std::endl;
+  //std::cout << GetMemRam() << std::endl;  
+
+}

@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1738840003.47964 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1738840004.39664 0
+["pdflatex"] 1738899147.59815 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1738899148.31572 0
   "C:/Users/Austi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1738825724 591513 326774de7b93dc3b6284af4d6d1bca05 ""
   "C:/Users/Austi/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1726789021 24225046 a71ecc3afb434c0f002e67a0218cb2d6 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -28,10 +28,12 @@
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/tfm/public/latex-fonts/lasy7.tfm" 1136765053 520 a74c6ed8cb48679fdc3ea874d9d34a7e ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/tfm/public/latex-fonts/lasy8.tfm" 1136765053 520 7bb3abb160b19e0ed6ac404bb59052b7 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247596666 32080 340ef9bf63678554ee606688e7b5339d ""
+  "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1247596667 30251 6afa5cb1d0204815a708a080681d4674 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1247596667 36741 0ee9e374ec3e30da87cdfb0ea3575226 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1247596666 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
+  "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1247596667 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1247596667 36118 fad905eba93cff5bce1e185fe980a177 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -62,9 +64,9 @@
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1704400941 30006 57b07afb710ee2f649c65cfbafda39c1 ""
   "Q8_a.drawio.pdf" 1738751242 21952 9d11b67f0a038f05a6969f8093540557 ""
   "Q8_b.drawio.pdf" 1738751223 21860 c7f03e22dbc7e620052c8cf77ed3209f ""
-  "d:/dev/ASN1/tex/hw1.tex" 1738840002 4143 0ab0adc7c820da12762e3740dda12188 ""
-  "hw1.aux" 1738840004 462 6d040220bbcf80e6582afef9b8072aec "pdflatex"
-  "hw1.tex" 1738840002 4143 0ab0adc7c820da12762e3740dda12188 ""
+  "d:/dev/ASN1/tex/hw1.tex" 1738899146 4282 699021852b7c4dd047238d62ad9b6201 ""
+  "hw1.aux" 1738899148 462 6d040220bbcf80e6582afef9b8072aec "pdflatex"
+  "hw1.tex" 1738899146 4282 699021852b7c4dd047238d62ad9b6201 ""
   (generated)
   "hw1.aux"
   "hw1.log"
