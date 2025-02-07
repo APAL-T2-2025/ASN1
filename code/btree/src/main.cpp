@@ -24,9 +24,11 @@ static void CustomArgs(benchmark::internal::Benchmark* bench) {
 
 inline static size_t GetMemRam() {
   PROCESS_MEMORY_COUNTERS memInfo;
+  
   if (GetProcessMemoryInfo(GetCurrentProcess(), &memInfo, sizeof(memInfo))) {
     return memInfo.QuotaPeakPagedPoolUsage; // KB
   }
+
   return -1;
 }
 
@@ -40,12 +42,15 @@ inline static size_t GetMemPagefile() {
 
 static void BM_MapInsertion(benchmark::State& state) {
 
-  int memRamBefore = GetMemRam();
-  int memPageBefore = GetMemPagefile();
+  state.PauseTiming();
+  int memRam= GetMemRam();
+  int memPage= GetMemPagefile();
 
   namespace fc = frozenca;
-  fc::BTreeSet<int> btree;
+  fc::BTreeSet<int, 1> btree;
 
+
+  state.ResumeTiming();
   for (auto _ : state) {
     for (int i = 0; i < state.range(0); i++) {
       btree.insert(i);
@@ -53,14 +58,8 @@ static void BM_MapInsertion(benchmark::State& state) {
     benchmark::DoNotOptimize(btree);
   }
 
-  int memRamAfter = GetMemRam();
-  int memPageAfter = GetMemPagefile();
-
-  int memRamUsed = memRamAfter;
-  int memPageUsed = memPageAfter;
-
-  state.counters["Memory_RAM_Used"] = memPageUsed;
-  state.counters["Memory_Pagefile_Used"] = memPageUsed;
+  state.counters["Memory_RAM_Used"] = memRam - GetMemRam();
+  state.counters["Memory_Pagefile_Used"] = memPage - GetMemPagefile();
 }
 BENCHMARK(BM_MapInsertion)->Apply(CustomArgs);
 
@@ -70,21 +69,8 @@ DEFINE_string(benchmark_out_format, "json", "Format of benchmark results output"
 int main(int argc, char** argv) {
   benchmark::Initialize(&argc, argv);
 
-  benchmark::AddCustomContext("Memory_Unit", "KB");
+  //benchmark::AddCustomContext("Memory_Unit", "KB");
 
   return benchmark::RunSpecifiedBenchmarks();
-
-  //std::cout << GetMemPagefile() << std::endl;
-  //std::cout << GetMemRam() << std::endl;
-
-
-  //std::vector<int> map;
-
-
-  //for (int i = 0; i < 10000; i++)
-  //  map.push_back(i);
-
-  //std::cout << GetMemPagefile() << std::endl;
-  //std::cout << GetMemRam() << std::endl;  
 
 }
