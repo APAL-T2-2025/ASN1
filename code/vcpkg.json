@@ -1,7 +1,8 @@
 {
   "dependencies": [
+    "benchmark",
     "fmt",
     "tlx",
-    "benchmark"
+    "gflags"
   ]
 }
