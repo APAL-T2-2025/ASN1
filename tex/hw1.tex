@@ -1,13 +1,13 @@
 \documentclass[12pt]{article}
 
 \usepackage[utf8]{inputenc}
-\usepackage{latexsym,amsfonts,amssymb,amsthm,amsmath, graphicx, float}
+\usepackage{latexsym,amsfonts,amssymb,amsthm,amsmath, graphicx, float, hyperref}
 
 \setlength{\parindent}{0in}
 \setlength{\oddsidemargin}{0in}
 \setlength{\textwidth}{6.5in}
 \setlength{\textheight}{8.8in}
-\setlength{\topmargin}{0in}
+\setlength{\topmargin}{-0.5in}
 \setlength{\headheight}{18pt}
 
 
@@ -166,7 +166,7 @@
     \end{itemize}
 \end{itemize}
 
-All benchmarks were compiled using \texttt{-Ox} optimization level with \texttt{MSVC} (version 19.42.34436) and executed in a single-threaded environment to minimize external interference.
+All benchmarks were compiled using \texttt{-Ox} optimization level with \texttt{MSVC} (version 19.42.34436) and executed in a single-threaded environment to minimize external interference. Memory usage was measured using the Windows API \texttt{GetProcessMemory()}.\\
 
 \subsubsection*{Questions And Experiments}
 	
@@ -243,20 +243,100 @@ b.) Search algorithm of Skip List when start is at the bottom left corner in $O(
 	\end{figure}
 	
 	
-	\vspace{2in} %Leave space for comments!
-	
-	
-	\subsection*{Problem 9. B-Tree Speed}
-	(Statement of problem goes here.)\\
-	
-	\begin{proof}
-		(Type your proof here.)
-	\end{proof}
-	
-	\vspace{2in} %Leave more space for comments!
-	
-	
-	
-	
+\vspace{2in} %Leave space for comments!
+
+
+\subsection*{Problem 9. B-Tree Speed}
+
+\subsubsection*{Experimental Setup}
+Conducted our benchmarks using Google Benchmark on a system with the following hardware specifications:
+
+\begin{itemize}
+	\item \textbf{Processor}: 11th Gen Intel(R) Core(TM) i7-11370H 8-core CPU @ 3.3 GHz
+	\item \textbf{Cache Hierarchy}:
+	\begin{itemize}
+		\item L1 Data: 48 KiB per core (\(\times 4\))
+		\item L1 Instruction: 32 KiB per core (\(\times 4\))
+		\item L2 Unified: 1280 KiB per core (\(\times 4\))
+		\item L3 Unified: 12,288 KiB (shared)
+	\end{itemize}
+\end{itemize}
+
+All benchmarks were compiled using \texttt{-Ox} optimization level with \texttt{MSVC} (version 19.42.34436) and executed in a single-threaded environment to minimize external interference. Memory usage was measured using the Windows API \texttt{GetProcessMemory()}.\\
+\\
+The B-Tree implementation utilized in this experiment is sourced from the repository by frozenca
+on GitHub~\cite{btree_github}.
+
+\subsubsection*{Finding Optimal Parameter b Of B-Tree}
+First I carried out benchmarks to measure performance of tens of millions of random unique keys being inserted into the B-Tree while varying b parameter. 
+\begin{table}[h]
+	\centering
+	\small
+	\begin{tabular}{lrrr}
+		\hline
+		\textbf{b} & \textbf{CPU Time (ms)} & \textbf{Virtual Memory Usage (KB)} & \textbf{Physical Memory Usage (KB)} \\
+		\hline
+		2    & 59359.375  & 1294456  & 2544788 \\
+		4    & 86968.750  & 539168   & 1063908 \\
+		6    & 106484.375 & 375208   & 740108  \\
+		8    & 123265.625 & 302968   & 596900  \\
+		16   & 135156.250 & 202252   & 400248  \\
+		32   & 144640.625 & 156320   & 309792  \\
+		64   & 153750.000 & 135372   & 268680  \\
+		128  & 163312.500 & 129468   & 256996  \\
+		256  & 174062.500 & 135368   & 267676  \\
+		512  & 186078.125 & 142356   & 280852  \\
+		1024 & 200796.875 & 145848   & 285412  \\
+		2048 & 221015.625 & 122476   & 246636  \\
+		\hline
+	\end{tabular}
+	\caption{Benchmark results for B-Tree insertion with $20 \times 10^6$ inserts and varying $b$ from 2 to 2048.}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{1\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/b-tree_insertion()_cpu_time.pdf}
+		\label{fig:cpu_time}
+	\end{minipage}\hfill
+	\\
+	\begin{minipage}{1\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/b-tree_physical_memory_usage.pdf}
+		\label{fig:physical_memory}
+	\end{minipage}\hfill
+	\caption{CPU Time and Physcal Memory Usage for B-Tree insertion with varying $b$ values.}
+\end{figure}
+
+Notice that as the parameter of $b$ the B-Tree increases, the physical memory usage decreases. This is strange, even when considering virtual memory (page file) usage. My theory is that increasing $b$ makes the tree shallower and more compact. Since a shallower tree reduces the number of pointers and improves spatial locality, nodes are more likely to fit within a cache line, leading to better memory efficiency?
+\\\\
+Anywhow... we want the b such that the it minimizes CPU time and memory used. They way I did it is to simply normalize CPU time and memory used and get closest b with to the smallest differnce. 
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{1\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/b-tree_benchmark_normalized.pdf}
+		\label{fig:benchmark_normalized}
+	\end{minipage}
+	\caption{Normalized CPU Time and Physcal Memory Usage comparison for B-Tree insertion with varying $b$ values.}
+\end{figure}
+
+Setting $b = 6$ gets the best overall performance. However, for applications that prioritize memory efficiency over execution time, a larger value, such as $b = 16$, could be more optimal, as the performance trade-off becomes less significant.
+
+\subsubsection*{Comparing B-Tree and Builtin Ordered-Map Performance}
+
+
+
+\vspace{2in} %Leave more space for comments!
+
+
+\begin{thebibliography}{9}
+	\bibitem{btree_github} 
+	B-Tree Implementation on GitHub. 
+	\textit{GitHub Repository}. 
+	Available at: \url{https://github.com/frozenca/BTree}
+\end{thebibliography}
 	
 \end{document}
