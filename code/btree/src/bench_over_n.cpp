@@ -121,8 +121,6 @@ static void BTreeMap_Search(benchmark::State& state) {
 
 static void OrderedMap_Search(benchmark::State& state) {
 
-  state.PauseTiming();
-
   std::vector<int> keys(state.range(0));
   std::iota(keys.begin(), keys.end(), 0);
   std::shuffle(keys.begin(), keys.end(), std::mt19937{ std::random_device{}() });
@@ -136,19 +134,15 @@ static void OrderedMap_Search(benchmark::State& state) {
     ordered_set.insert(key);
   }
 
-  state.ResumeTiming();
   for (auto _ : state) {
     for (auto key : keys) {
       benchmark::DoNotOptimize(ordered_set.find(key));
     }
   }
-  state.PauseTiming();
 
   state.counters["RAM"] = double(GetMemRam()) - memRam;
   state.counters["Page"] = double(GetMemPagefile()) - memPage;
 }
-
-
 
 BENCHMARK(OrderedMap_Insertion)->RangeMultiplier(2)->Range(8, 8 << 22);
 BENCHMARK_TEMPLATE(BTreeMap_Insertion, 2)->RangeMultiplier(2)->Range(8, 8 << 22);
