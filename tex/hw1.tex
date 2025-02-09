@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
 \usepackage[utf8]{inputenc}
-\usepackage{latexsym,amsfonts,amssymb,amsthm,amsmath, graphicx, float, hyperref, caption}
+\usepackage{latexsym,amsfonts,amssymb,amsthm,amsmath, graphicx, float, hyperref, caption, breakurl, url}
 
 \setlength{\parindent}{0in}
 \setlength{\oddsidemargin}{0in}
@@ -152,7 +152,7 @@
 	
 	\subsection*{Problem 7. Skip List}
 	\vspace{20pt}
-	\subsubsection*{Experimental Setup}
+	\subsubsection*{Experimental Set1up}
 	Conducted our benchmarks using Google Benchmark~\cite{google-bench} on a system with the following hardware specifications:
 
 \begin{itemize}
@@ -207,13 +207,226 @@ Q1.) Can we perform count coin tosses differently and is the alternative better?
 	\label{tab:benchmark_results}
 \end{table}
 
-Q2.) How does varying max height change performance?
 
-Q3.) Linked lists are known to be cache unfriendly, is there a way we can modify 
+Q2.) How to define vertical nodes withoud the downsides of introducing linked-list like overhead? \\
 
-Q4.) How does it perform against a reputable ordered map?
+This is an awfully convenient question, because it is, I chose the question as an outlet to describe how I got to my current implementation of skip list. My first implementation of skip list was almost 2 weeks ago was horrendously slow. It took seconds to insert 1 million keys, never mind trying to insert 10s of millions of keys. It was so frustrating, I couldn't pinpoint exactly what was causing the bottleneck. The code was text-book, simple node struct, search for the insertion point, and stitch the new node/nodes into place.
 \\\\
-	
+After dilly dallying with debuggers and profilers, I thought that traversal was what was slowing everything down. Instead of using a linked-list to extend higher keys I thought of using an array instead as it is more cache friendly and might help solve the problem. I didn't have to store keys at every-level and vertical references. Since the data is more 'packed' I thought maybe it would solve the long traversal times.
+\\\\
+At last I felt that inserting keys were faster however it still took almost a second to insert a million keys. After sulking in the group chat Jorn asks whether I got my implementation ideas from a particular stack-overflow thread \cite{stack-overflow} as I had that vertical array going on. I sure didn't but I was surprised to see in many ways the shape of their function was kinda the same. We came to similar conclusions on implementation. However one thing that stood out in this implementation the author took special care in allocating nodes. They used a custom allocator, and allocated arrays manually. Their results were blazingly fast!
+\\\\
+For my array data-structure I used std::vector, it was a big mistake, vectors have all kinds of fancy stuff to make them safe and easy to use. All the added indirection vector brought killed the performance of my skip-list. After swapping out std::vector to directly allocating the memory  like the author in that stack-overflow thread, the speed was finally bearable to insert $2^{22}$ keys.
+\\\\
+
+\pagebreak
+
+Q3.) How does it perform against a reputable ordered map?\\
+
+
+\noindent
+\begin{minipage}{0.45\textwidth}
+    \centering
+	\resizebox{1\textwidth}{!}{%
+		\begin{tabular}{rrr}
+		\hline
+		\multicolumn{3}{c}{\textbf{Skip List Insertion}} \\ \hline
+		n             & CPU Time (ms)      & Memory Usage (KB)      \\ \hline
+		8       & 1.14E-04 & 0      \\
+		16      & 1.76E-04 & 0      \\
+		32      & 5.78E-04 & 0      \\
+		64      & 1.20E-03 & 0      \\
+		128     & 3.25E-03 & 0      \\
+		256     & 6.63E-03 & 0      \\
+		512     & 1.60E-02 & 0      \\
+		1024    & 6.98E-02 & 32     \\
+		2048    & 2.00E-01 & 72     \\
+		4096    & 4.39E-01 & 208    \\
+		8192    & 1.20E+00 & 444    \\
+		16384   & 2.54E+00 & 884    \\
+		32768   & 6.56E+00 & 1724   \\
+		65536   & 1.75E+01 & 3436   \\
+		131072  & 4.97E+01 & 6988   \\
+		262144  & 1.88E+02 & 15048  \\
+		524288  & 6.72E+02 & 30228  \\
+		524288  & 6.88E+02 & 30172  \\
+		1048576 & 1.69E+03 & 60384  \\
+		2097152 & 4.42E+03 & 120756 \\
+		4194304 & 1.14E+04 & 241416 \\
+		8388608 & 2.81E+04 & 483244  \\ \hline
+		\end{tabular}
+	}
+    % \captionof{table}{First Table}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.45\textwidth}
+    \centering
+	\resizebox{1.0\textwidth}{!}{%
+		\begin{tabular}{rrr}
+		\hline
+		\multicolumn{3}{c}{\textbf{Ordered Map Insertion}} \\ \hline
+		n             & CPU Time (ms)      & Memory Usage (KB)      \\ \hline
+		8       & 0.00E+00 & 0      \\
+		16      & 0.00E+00 & 0      \\
+		32      & 0.00E+00 & 0      \\
+		64      & 1.32E+01 & 0      \\
+		128     & 4.73E+00 & 0      \\
+		256     & 1.25E+01 & 0      \\
+		512     & 0.00E+00 & 0      \\
+		1024    & 5.78E+00 & 0      \\
+		2048    & 8.72E+00 & 0      \\
+		4096    & 1.45E+01 & 0      \\
+		8192    & 2.78E+01 & 0      \\
+		16384   & 4.94E+01 & 0      \\
+		32768   & 4.88E+01 & 0      \\
+		65536   & 5.31E+01 & 68     \\
+		131072  & 1.20E+02 & 136    \\
+		262144  & 3.33E+02 & 11864  \\
+		524288  & 5.26E+02 & 204    \\
+		524288  & 5.23E+02 & 336    \\
+		1048576 & 8.28E+02 & 24396  \\
+		2097152 & 2.08E+03 & 98332  \\
+		4194304 & 5.08E+03 & 197080 \\
+		8388608 & 1.25E+04 & 394916 \\ \hline
+		\end{tabular}
+		}
+\end{minipage}%
+\vspace{14pt}
+\begin{minipage}{0.45\textwidth}
+    \centering
+	\resizebox{1\textwidth}{!}{%
+		\begin{tabular}{rrr}
+		\hline
+		\multicolumn{3}{c}{\textbf{Skip List Search}} \\ \hline
+		n             & CPU Time (ms)      & Memory Usage (KB)      \\ \hline
+		8       & 2.90E-05 & 0      \\
+		16      & 8.50E-05 & 0      \\
+		32      & 3.49E-04 & 0      \\
+		64      & 6.10E-04 & 0      \\
+		128     & 1.22E-03 & 0      \\
+		256     & 2.70E-03 & 0      \\
+		512     & 7.12E-03 & 0      \\
+		1024    & 6.00E-02 & 0      \\
+		2048    & 1.57E-01 & 32     \\
+		4096    & 3.99E-01 & 28     \\
+		8192    & 9.83E-01 & 156    \\
+		16384   & 2.68E+00 & 520    \\
+		32768   & 6.28E+00 & 1476   \\
+		65536   & 1.67E+01 & 3320   \\
+		131072  & 4.69E+01 & 6972   \\
+		262144  & 2.15E+02 & 14604  \\
+		524288  & 5.31E+02 & 29776  \\
+		524288  & 5.63E+02 & 29708  \\
+		1048576 & 1.66E+03 & 60032  \\
+		2097152 & 3.95E+03 & 120340 \\
+		4194304 & 9.83E+03 & 241212 \\
+		8388608 & 2.36E+04 & 482876  \\ \hline
+		\end{tabular}
+	}
+    % \captionof{table}{First Table}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.45\textwidth}
+    \centering
+	\resizebox{1.0\textwidth}{!}{%
+		\begin{tabular}{rrr}
+		\hline
+		\multicolumn{3}{c}{\textbf{Ordered Map Search}} \\ \hline
+		n             & CPU Time (ms)      & Memory Usage (KB)      \\ \hline
+		8       & 2.90E-05 & 0      \\
+		16      & 8.50E-05 & 0      \\
+		32      & 3.49E-04 & 0      \\
+		64      & 6.10E-04 & 0      \\
+		128     & 1.22E-03 & 0      \\
+		256     & 2.70E-03 & 0      \\
+		512     & 7.12E-03 & 0      \\
+		1024    & 6.00E-02 & 0      \\
+		2048    & 1.57E-01 & 32     \\
+		4096    & 3.99E-01 & 28     \\
+		8192    & 9.83E-01 & 156    \\
+		16384   & 2.68E+00 & 520    \\
+		32768   & 6.28E+00 & 1476   \\
+		65536   & 1.67E+01 & 3320   \\
+		131072  & 4.69E+01 & 6972   \\
+		262144  & 2.15E+02 & 14604  \\
+		524288  & 5.31E+02 & 29776  \\
+		524288  & 5.63E+02 & 29708  \\
+		1048576 & 1.66E+03 & 60032  \\
+		2097152 & 3.95E+03 & 120340 \\
+		4194304 & 9.83E+03 & 241212 \\
+		8388608 & 2.36E+04 & 482876 \\ \hline
+		\end{tabular}
+		}
+\end{minipage}%
+
+
+\begin{figure}[H]
+	\centering
+
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/plot/sl_insertion_cpu_time_(ms).pdf}
+		\label{fig:cpu_time}
+	\end{minipage}\hfill
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf}
+		\label{fig:physical_memory}
+	\end{minipage}\hfill\
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/plot/sl_search_cpu_time_(ms).pdf}
+		\label{fig:physical_memory}
+	\end{minipage}\hfill
+	\caption{CPU Time and Memory Usage of Skip List and Ordered Map.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/plot/sl_liminsertion_cpu_time_(ms).pdf}
+		\label{fig:cpu_time}
+	\end{minipage}\hfill
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/plot/sl_liminsertion_physical_memory_usage_(kb).pdf}
+		\label{fig:physical_memory}
+	\end{minipage}\hfill\
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/plot/sl_limsearch_cpu_time_(ms).pdf}
+		\label{fig:physical_memory}
+	\end{minipage}\hfill
+	\caption{Crop of Figure 1.}
+\end{figure}
+
+
+
+Q4.) How might varying max height change performance of Skip List?\\
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/plot/sl_maxlevel_insertion_cpu_time_(ms).pdf}
+		\label{fig:cpu_time}
+	\end{minipage}\hfill
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/plot/sl_maxlevel_insertion_physical_memory_usage_(kb).pdf}
+		\label{fig:physical_memory}
+	\end{minipage}\hfill\
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../notebook/plot/sl_maxlevel_search_cpu_time_(ms).pdf}
+		\label{fig:physical_memory}
+	\end{minipage}\hfill
+	\caption{Crop of }
+\end{figure}
+
+
 b.) Search algorithm of Skip List when start is at the bottom left corner in $O(\log(d))$ where d is the number of elements smaller than the key?
 	
 
@@ -221,7 +434,7 @@ b.) Search algorithm of Skip List when start is at the bottom left corner in $O(
 	\vspace{2in} %Leave space for comments!
 	
 	
-	
+	\pagebreak
 	\subsection*{Problem 8. ($a,b$) tree. ($2, 3$) tree.}
 
 	a.)	
@@ -245,7 +458,7 @@ b.) Search algorithm of Skip List when start is at the bottom left corner in $O(
 	
 \vspace{2in} %Leave space for comments!
 
-
+\pagebreak
 \subsection*{Problem 9. B-Tree Speed}
 
 \subsubsection*{Experimental Setup}
@@ -311,7 +524,7 @@ First I carried out benchmarks to measure performance, $20 \times 10^6$ random u
 		\includegraphics[width=\linewidth]{../notebook/plot/b-tree_physical_memory_usage.pdf}
 		\label{fig:physical_memory}
 	\end{minipage}\hfill
-	\caption{CPU Time and Physcal Memory Usage for B-Tree insertion with varying $b$ values.}
+	\caption{CPU Time and Memory Usage for B-Tree insertion with varying $b$ values.}
 \end{figure}
 
 Notice that as the parameter of $b$ the B-Tree increases, the physical memory usage decreases. My theory is that increasing $b$ makes the tree shallower and more compact. Since a shallower tree reduces the number of pointers and improves spatial locality, nodes are more likely to fit within a cache line, leading to better memory efficiency?
@@ -325,7 +538,7 @@ Anywhow... we want the b such that the it minimizes CPU time and memory used. Th
 		\includegraphics[width=\linewidth]{../notebook/plot/b-tree_benchmark_normalized.pdf}
 		\label{fig:benchmark_normalized}
 	\end{minipage}
-	\caption{Normalized CPU Time and Physcal Memory Usage comparison for B-Tree insertion with varying $b$ values.}
+	\caption{Normalized CPU Time and Memory Usage comparison for B-Tree insertion with varying $b$ values.}
 \end{figure}
 
 Setting $b = 6$ minimizes both performance overhead and memory usage the most. However, for applications that prioritize memory efficiency over execution time, a larger value, such as $b = 16$, may be more optimal, as the performance trade-off becomes less significant. This version clarifies that $b = 6$ minimizes both performance overhead and memory usage while improving the flow of the second sentence.
@@ -349,7 +562,7 @@ Setting $b = 6$ minimizes both performance overhead and memory usage the most. H
 		\includegraphics[width=1\linewidth]{../notebook/plot/search_cpu_time_(ms)}
 	\end{minipage}\hfill
 
-	\caption{CPU Time and Physcal Memory Usage of B-Tree and C++ Builtin Ordered Map. Inserted $2^{24}$ unique and random keys.}
+	\caption{CPU Time and Memory Usage of B-Tree and C++ Builtin Ordered Map. Inserted $2^{24}$ unique and random keys.}
 	\label{fig:om_vs_bt}
 \end{figure}
 
@@ -360,9 +573,9 @@ Figure~\ref{fig:om_vs_bt} illustrates that the running time for the C++ built-in
 
 
 \noindent
-\begin{minipage}{0.5\textwidth}
+\begin{minipage}{0.45\textwidth}
     \centering
-	\resizebox{0.85\textwidth}{!}{%
+	\resizebox{1\textwidth}{!}{%
 		\begin{tabular}{rrr}
 		\hline
 		\multicolumn{3}{c}{\textbf{Ordered Map Insertion}} \\ \hline
@@ -394,9 +607,9 @@ Figure~\ref{fig:om_vs_bt} illustrates that the running time for the C++ built-in
 		}
 \end{minipage}%
 \hfill
-\begin{minipage}{0.5\textwidth}
+\begin{minipage}{0.45\textwidth}
     \centering
-	\resizebox{0.85\textwidth}{!}{%
+	\resizebox{1\textwidth}{!}{%
 		\begin{tabular}{rrr}
 		\hline
 		\multicolumn{3}{c}{\textbf{B-Tree $$b=6$$ Insertion}} \\ \hline
@@ -432,9 +645,9 @@ Figure~\ref{fig:om_vs_bt} illustrates that the running time for the C++ built-in
 \vspace{14pt}
 
 \noindent
-\begin{minipage}{0.5\textwidth}
+\begin{minipage}{0.45\textwidth}
     \centering
-	\resizebox{0.85\textwidth}{!}{%
+	\resizebox{1\textwidth}{!}{%
 		\begin{tabular}{rrr}
 		\hline
 		\multicolumn{3}{c}{\textbf{Ordered Map Search}} \\ \hline
@@ -466,9 +679,9 @@ Figure~\ref{fig:om_vs_bt} illustrates that the running time for the C++ built-in
 	}
 \end{minipage}%
 \hfill
-\begin{minipage}{0.5\textwidth}
+\begin{minipage}{0.45\textwidth}
     \centering
-	\resizebox{0.85\textwidth}{!}{%
+	\resizebox{1\textwidth}{!}{%
 		\begin{tabular}{rrr}
 		\hline
 		\multicolumn{3}{c}{\textbf{B-Tree $$b=6$$ Search}} \\ \hline
@@ -507,18 +720,22 @@ Figure~\ref{fig:om_vs_bt} illustrates that the running time for the C++ built-in
 \begin{thebibliography}{9}
 	\bibitem{google-bench} 
 	Google Benchmark. 
-	\textit{A microbenchmark support library}. 
-	Available at: \url{https://github.com/google/benchmark}
+	\textit{A microbenchmark support library}. \\
+	\url{https://github.com/google/benchmark}
 
 	\bibitem{btree_github} 
 	B-Tree Implementation on GitHub. 
-	\textit{GitHub Repository}. 
-	Available at: \url{https://github.com/frozenca/BTree}
+	\textit{GitHub Repository}. \\
+	\url{https://github.com/frozenca/BTree}
 
 	\bibitem{getprocessmemoryinfo} 
 	GetProcessMemoryInfo function. 
-	\textit{Microsoft Learn}. 
-	Available at: \url{https://learn.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-getprocessmemoryinfo}
+	\textit{Microsoft Learn}. \\
+	\url{https://learn.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-getprocessmemoryinfo}
+
+	\bibitem{stack-overflow} 
+	Skip Lists Stack Overflow.
+	\sloppy\url{https://stackoverflow.com/questions/31580869/skip-lists-are-they-really-performing-as-good-as-pugh-paper-claim/34003558\#34003558}
 
 \end{thebibliography}
 

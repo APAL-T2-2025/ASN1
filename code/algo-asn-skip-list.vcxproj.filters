@@ -24,6 +24,9 @@
     <ClCompile Include="src\bench_over_n.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\becnh_over_ml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\skip_list.h">
