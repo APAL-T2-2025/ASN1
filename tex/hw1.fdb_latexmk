@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1739139125.49955 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1739139127.01624 0
+["pdflatex"] 1739140298.73535 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1739140300.19421 0
   "../notebook/plot/b-tree_benchmark_normalized.pdf" 1739092959 252178 7d05fe9a4f3b4979c45a31565d244689 ""
   "../notebook/plot/b-tree_insertion()_cpu_time.pdf" 1739092960 219638 b1a5a526dd5a9b48b146a2d992b9093a ""
   "../notebook/plot/b-tree_physical_memory_usage.pdf" 1739092961 280187 7a9baac006d4dcb46943cf86e9283cd5 ""
@@ -134,10 +134,10 @@
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "Q8_a.drawio.pdf" 1738751242 21952 9d11b67f0a038f05a6969f8093540557 ""
   "Q8_b.drawio.pdf" 1738751223 21860 c7f03e22dbc7e620052c8cf77ed3209f ""
-  "d:/dev/ASN1/tex/hw1.tex" 1739138994 26526 a98bbbf55f046627c063c740be63b298 ""
-  "hw1.aux" 1739139126 5059 e053d22e10f06333e5a5be4b5a2796ef "pdflatex"
-  "hw1.out" 1739139126 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "hw1.tex" 1739138994 26526 a98bbbf55f046627c063c740be63b298 ""
+  "d:/dev/ASN1/tex/hw1.tex" 1739140297 28068 35e7c37d63acefcf900bd8cd20c5513f ""
+  "hw1.aux" 1739140299 5059 fcaef0b20b2366e31820609863bc84d7 "pdflatex"
+  "hw1.out" 1739140299 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "hw1.tex" 1739140297 28068 35e7c37d63acefcf900bd8cd20c5513f ""
   (generated)
   "hw1.aux"
   "hw1.log"

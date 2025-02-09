@@ -170,7 +170,7 @@ All benchmarks were compiled using \texttt{-Ox} optimization level with \texttt{
 
 \subsubsection*{Questions And Experiments}
 	
-Q1.) Can we perform count coin tosses differently and is the alternative better?
+a.1) Can we perform count coin tosses differently and is the alternative better?
 
 \begin{figure}[H]
 	\centering
@@ -208,20 +208,20 @@ Q1.) Can we perform count coin tosses differently and is the alternative better?
 \end{table}
 
 
-Q2.) How to define vertical nodes withoud the downsides of introducing linked-list like overhead? \\
+a.2) How to define vertical nodes withoud the downsides of introducing linked-list like overhead? \\
 
 This is an awfully convenient question, because it is, I chose the question as an outlet to describe how I got to my current implementation of skip list. My first implementation of skip list was almost 2 weeks ago was horrendously slow. It took seconds to insert 1 million keys, never mind trying to insert 10s of millions of keys. It was so frustrating, I couldn't pinpoint exactly what was causing the bottleneck. The code was text-book, simple node struct, search for the insertion point, and stitch the new node/nodes into place.
 \\\\
 After dilly dallying with debuggers and profilers, I thought that traversal was what was slowing everything down. Instead of using a linked-list to extend higher keys I thought of using an array instead as it is more cache friendly and might help solve the problem. I didn't have to store keys at every-level and vertical references. Since the data is more 'packed' I thought maybe it would solve the long traversal times.
 \\\\
-At last I felt that inserting keys were faster however it still took almost a second to insert a million keys. After sulking in the group chat Jorn asks whether I got my implementation ideas from a particular stack-overflow thread \cite{stack-overflow} as I had that vertical array going on. I sure didn't but I was surprised to see in many ways the shape of their function was kinda the same. We came to similar conclusions on implementation. However one thing that stood out in this implementation the author took special care in allocating nodes. They used a custom allocator, and allocated arrays manually. Their results were blazingly fast!
+At last I felt that inserting keys were faster however it still took almost a second to insert a million keys. After sulking in the group chat, Jorn asks whether I got my implementation ideas from a particular stack-overflow thread \cite{stack-overflow} as I had that vertical array going on. I sure didn't but I was surprised to see in many ways the shape of their function was kinda the same. We came to similar conclusions on implementation. However one thing that stood out in this implementation the author took special care in allocating nodes. They used a custom allocator, and allocated arrays manually. Their results were blazingly fast!
 \\\\
-For my array data-structure I used std::vector, it was a big mistake, vectors have all kinds of fancy stuff to make them safe and easy to use. All the added indirection vector brought killed the performance of my skip-list. After swapping out std::vector to directly allocating the memory  like the author in that stack-overflow thread, the speed was finally bearable to insert $2^{22}$ keys.
+For my array data-structure I used \texttt{std::vector}, it was a big mistake, vectors have all kinds of fancy stuff to make them safe and easy to use. All the added indirection vector brought killed the performance of my skip-list. After swapping out std::vector to directly allocating the memory  like the author in that stack-overflow thread, the speed was finally bearable to insert $2^{22}$ keys.
 \\\\
 
 \pagebreak
 
-Q3.) How does it perform against a reputable ordered map?\\
+a.3) How does it perform against a reputable ordered map?\\
 
 
 \noindent
@@ -333,28 +333,28 @@ Q3.) How does it perform against a reputable ordered map?\\
 		\hline
 		\multicolumn{3}{c}{\textbf{Ordered Map Search}} \\ \hline
 		n             & CPU Time (ms)      & Memory Usage (KB)      \\ \hline
-		8       & 2.90E-05 & 0      \\
-		16      & 8.50E-05 & 0      \\
-		32      & 3.49E-04 & 0      \\
-		64      & 6.10E-04 & 0      \\
-		128     & 1.22E-03 & 0      \\
-		256     & 2.70E-03 & 0      \\
-		512     & 7.12E-03 & 0      \\
-		1024    & 6.00E-02 & 0      \\
-		2048    & 1.57E-01 & 32     \\
-		4096    & 3.99E-01 & 28     \\
-		8192    & 9.83E-01 & 156    \\
-		16384   & 2.68E+00 & 520    \\
-		32768   & 6.28E+00 & 1476   \\
-		65536   & 1.67E+01 & 3320   \\
-		131072  & 4.69E+01 & 6972   \\
-		262144  & 2.15E+02 & 14604  \\
-		524288  & 5.31E+02 & 29776  \\
-		524288  & 5.63E+02 & 29708  \\
-		1048576 & 1.66E+03 & 60032  \\
-		2097152 & 3.95E+03 & 120340 \\
-		4194304 & 9.83E+03 & 241212 \\
-		8388608 & 2.36E+04 & 482876 \\ \hline
+		8       & 3.20E-05 & 0      \\
+		16      & 9.40E-05 & 0      \\
+		32      & 2.00E-04 & 0      \\
+		64      & 4.30E-04 & 0      \\
+		128     & 9.84E-04 & 0      \\
+		256     & 2.25E-03 & 0      \\
+		512     & 6.70E-03 & 0      \\
+		1024    & 3.84E-02 & 0      \\
+		2048    & 1.09E-01 & 0      \\
+		4096    & 2.51E-01 & 0      \\
+		8192    & 6.14E-01 & 0      \\
+		16384   & 1.38E+00 & 64     \\
+		32768   & 4.62E+00 & 0      \\
+		65536   & 1.00E+01 & 32     \\
+		131072  & 2.40E+01 & 0      \\
+		262144  & 8.48E+01 & 204    \\
+		524288  & 2.73E+02 & 204    \\
+		524288  & 2.73E+02 & 68     \\
+		1048576 & 8.91E+02 & 23996  \\
+		2097152 & 2.19E+03 & 49152  \\
+		4194304 & 5.45E+03 & 98832  \\
+		8388608 & 1.31E+04 & 290012 \\ \hline
 		\end{tabular}
 		}
 \end{minipage}%
@@ -403,8 +403,64 @@ Q3.) How does it perform against a reputable ordered map?\\
 \end{figure}
 
 
-
+\pagebreak
 Q4.) How might varying max height change performance of Skip List?\\
+
+\noindent
+\begin{minipage}{0.5\textwidth}
+    \centering
+	\resizebox{1\textwidth}{!}{%
+		\begin{tabular}{rrr}
+		\hline
+		\multicolumn{3}{c}{\textbf{Skip List Insertion}} \\ \hline
+		Max Level             & CPU Time (ms)      & Memory Usage (KB)      \\ \hline
+		2  & 3.03E+04 & 6888 \\
+		4  & 2.91E+03 & 7232 \\
+		6  & 7.66E+02 & 7424 \\
+		8  & 2.97E+02 & 7480 \\
+		10 & 1.32E+02 & 7456 \\
+		12 & 5.86E+01 & 7424 \\
+		14 & 4.69E+01 & 7416 \\
+		16 & 6.53E+01 & 7404 \\
+		18 & 5.40E+01 & 7440 \\
+		20 & 5.00E+01 & 7484 \\
+		22 & 4.69E+01 & 7520 \\
+		24 & 5.16E+01 & 7420 \\
+		26 & 4.98E+01 & 7404 \\
+		28 & 5.16E+01 & 7388 \\
+		30 & 4.55E+01 & 7420 \\
+		32 & 4.83E+01 & 7500  \\ \hline
+		\end{tabular}
+	}
+    % \captionof{table}{First Table}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.5\textwidth}
+    \centering
+	\resizebox{1.0\textwidth}{!}{%
+		\begin{tabular}{rrr}
+		\hline
+		\multicolumn{3}{c}{\textbf{Skip List Map Search}} \\ \hline
+		Max Level   & CPU Time (ms)      & Memory Usage (KB)      \\ \hline
+		2  & 3.03E+04 & 6888 \\
+		4  & 2.91E+03 & 7232 \\
+		6  & 7.66E+02 & 7424 \\
+		8  & 2.97E+02 & 7480 \\
+		10 & 1.32E+02 & 7456 \\
+		12 & 5.86E+01 & 7424 \\
+		14 & 4.69E+01 & 7416 \\
+		16 & 6.53E+01 & 7404 \\
+		18 & 5.40E+01 & 7440 \\
+		20 & 5.00E+01 & 7484 \\
+		22 & 4.69E+01 & 7520 \\
+		24 & 5.16E+01 & 7420 \\
+		26 & 4.98E+01 & 7404 \\
+		28 & 5.16E+01 & 7388 \\
+		30 & 4.55E+01 & 7420 \\
+		32 & 4.83E+01 & 7500 \\ \hline
+		\end{tabular}
+		}
+\end{minipage}%
 
 \begin{figure}[H]
 	\centering
