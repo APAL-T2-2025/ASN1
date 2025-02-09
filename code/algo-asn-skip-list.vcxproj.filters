@@ -21,7 +21,7 @@
     <ClCompile Include="src\skip_list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\skip_list_node.cpp">
+    <ClCompile Include="src\bench_over_n.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

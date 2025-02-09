@@ -6,14 +6,13 @@
 
 #include "skip_list_node.h"
 
-#define RANDOM_INT_TYPE std::uint16_t
 
 namespace apal {
 
   class SkipList {
   public:
 
-    SkipList(uint32_t level_max = 20);
+    SkipList();
     
     ~SkipList();
 
@@ -35,8 +34,13 @@ namespace apal {
 
   private:
 
-    uint32_t  m_level_max;
-    uint32_t m_level;
+    SkipListNode* create_node(int level, const uint64_t new_key);
+
+    void destroy_node(SkipListNode* node);
+
+    int level;
+
+    uint8_t m_level;
     size_t m_size;
 
     SkipListNode* m_head;

@@ -1,11 +1,14 @@
 # Fdb version 4
-["pdflatex"] 1739007560.17897 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1739007561.27428 0
-  "../notebook/b-tree_benchmark_normalized.pdf" 1739007214 252178 1759df84b2c7017b7207f23afc399563 ""
-  "../notebook/b-tree_insertion()_cpu_time.pdf" 1739007026 220093 6a4055e5db04af7e642bdd71d0f7f905 ""
-  "../notebook/b-tree_physical_memory_usage.pdf" 1739007028 280603 8dc4b4903350a47ba1913f873215c6e6 ""
+["pdflatex"] 1739030418.63147 "d:/dev/ASN1/tex/hw1.tex" "hw1.pdf" "hw1" 1739030420.07931 0
+  "../notebook/b-tree_benchmark_normalized.pdf" 1739029277 252178 85c8ad6a2417985d173ede3eae938b97 ""
+  "../notebook/b-tree_insertion()_cpu_time.pdf" 1739029798 219638 ab920e872d7dbf765865166bb8c4aeb1 ""
+  "../notebook/b-tree_physical_memory_usage.pdf" 1739029839 280187 c86c5a6298721ebf71c5a10f3c37f0e5 ""
   "../notebook/coin_flips_for_real.pdf" 1738956440 244000 011ed24223eaa7c951e9ef43377772cc ""
   "../notebook/comparison_of_distributions.pdf" 1738999426 244810 f642393993e1487b8352eb2475a26ac4 ""
   "../notebook/count_leading_0s_of_random_uint_32.pdf" 1738956442 244052 fbe4262da6be476b2014a5f5085d2dd3 ""
+  "../notebook/insertion_cpu_time_(ms).pdf" 1739029109 283300 06b2e3e5eb942766b4b36b021636f9d7 ""
+  "../notebook/insertion_physical_memory_usage_(kb).pdf" 1739029108 283598 21e26e2d17d9ceb50fc671ba7e46052f ""
+  "../notebook/search_cpu_time_(ms).pdf" 1739029112 283407 1c6a48af3dfbb147fda56537acde2cb0 ""
   "C:/Users/Austi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1738825724 591513 326774de7b93dc3b6284af4d6d1bca05 ""
   "C:/Users/Austi/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1726789021 24225046 a71ecc3afb434c0f002e67a0218cb2d6 ""
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1001775420 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -115,10 +118,10 @@
   "C:/Users/Austi/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "Q8_a.drawio.pdf" 1738751242 21952 9d11b67f0a038f05a6969f8093540557 ""
   "Q8_b.drawio.pdf" 1738751223 21860 c7f03e22dbc7e620052c8cf77ed3209f ""
-  "d:/dev/ASN1/tex/hw1.tex" 1739007559 11601 3462ed7b7ea54836f6a86a9b7c24aa9f ""
-  "hw1.aux" 1739007561 2250 166cfc9850b25478395aeb5d28d6dcca "pdflatex"
-  "hw1.out" 1739007560 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "hw1.tex" 1739007559 11601 3462ed7b7ea54836f6a86a9b7c24aa9f ""
+  "d:/dev/ASN1/tex/hw1.tex" 1739030417 12402 c759cad7a17b396f56799709aec31644 ""
+  "hw1.aux" 1739030419 2433 85282470409e32fafcd4293df505729b "pdflatex"
+  "hw1.out" 1739030419 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "hw1.tex" 1739030417 12402 c759cad7a17b396f56799709aec31644 ""
   (generated)
   "hw1.aux"
   "hw1.log"

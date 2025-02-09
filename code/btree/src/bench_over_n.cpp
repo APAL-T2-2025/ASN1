@@ -102,14 +102,14 @@ static void BTreeMap_Search(benchmark::State& state) {
   fc::BTreeSet<int, B> btree;
 
   for (auto key : keys) {
-    //btree.insert(key);
+    btree.insert(key);
   }
 
   state.ResumeTiming();
 
   for (auto _ : state) {
     for (auto key : keys) {
-      //benchmark::DoNotOptimize(btree.find(key));
+      benchmark::DoNotOptimize(btree.find(key));
     }
   }
   state.PauseTiming();

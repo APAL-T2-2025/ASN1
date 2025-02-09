@@ -2355,7 +2355,7 @@ struct IterationLogic::Impl {
                 os << "| :boom: " << fmt::MarkDownCode(mBench.name()) << " (" << errorMessage << ')' << std::endl;
             } else {
                 for (auto const& col : columns) {
-                    os << col.value();
+                    os << col.key();
                 }
                 os << "| ";
                 auto showUnstable = isWarningsEnabled() && rErrorMedian >= 0.05;

@@ -162,9 +162,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\bench_over_n.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\skip_list.cpp" />
-    <ClCompile Include="src\skip_list_node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\nanobench.h" />

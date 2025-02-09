@@ -295,13 +295,12 @@ First I carried out benchmarks to measure performance of tens of millions of ran
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}{1\textwidth}
+	\begin{minipage}{0.5\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../notebook/b-tree_insertion()_cpu_time.pdf}
 		\label{fig:cpu_time}
 	\end{minipage}\hfill
-	\\
-	\begin{minipage}{1\textwidth}
+	\begin{minipage}{0.5\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../notebook/b-tree_physical_memory_usage.pdf}
 		\label{fig:physical_memory}
@@ -323,9 +322,31 @@ Anywhow... we want the b such that the it minimizes CPU time and memory used. Th
 	\caption{Normalized CPU Time and Physcal Memory Usage comparison for B-Tree insertion with varying $b$ values.}
 \end{figure}
 
-Setting $b = 6$ gets the best overall performance. However, for applications that prioritize memory efficiency over execution time, a larger value, such as $b = 16$, could be more optimal, as the performance trade-off becomes less significant.
+Setting $b = 6$ minimizes both performance overhead and memory usage the most. However, for applications that prioritize memory efficiency over execution time, a larger value, such as $b = 16$, may be more optimal, as the performance trade-off becomes less significant.This version clarifies that $b = 6$ minimizes both performance overhead and memory usage while improving the flow of the second sentence. Let me know if you need further adjustments!
 
 \subsubsection*{Comparing B-Tree and Builtin Ordered-Map Performance}
+
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{../notebook/insertion_cpu_time_(ms)}
+	\end{minipage}\hfill
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{../notebook/insertion_physical_memory_usage_(kb)}
+	\end{minipage}\hfill
+
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{../notebook/search_cpu_time_(ms)}
+	\end{minipage}\hfill
+
+	\caption{CPU Time and Physcal Memory Usage of B-Tree and C++ Builtin Ordered Map.}
+\end{figure}
+
+
 
 
 

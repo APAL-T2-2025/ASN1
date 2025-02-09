@@ -6,76 +6,84 @@
 #include <iostream>
 #include <random>
 #include <tuple>
+#include <cassert>
 
 #include "skip_list.h"
 
 // #define DEBUG_STATIC_SEED 27
 
+static const int max_level = 32;
+
 namespace apal {
 
-  SkipList::SkipList(uint32_t level_max)
-    : m_size(0),
-    m_level(0),
-    m_level_max(level_max) {
+  SkipList::SkipList()
+    : m_head(nullptr), m_level(0) {
 
     m_distribution = std::uniform_int_distribution<uint32_t>(0, UINT32_MAX);
-
 #ifdef DEBUG_STATIC_SEED
     m_generator.seed(DEBUG_STATIC_SEED);
 #else
     m_generator.seed(std::chrono::system_clock::now().time_since_epoch().count());
 #endif
 
-    m_head = new SkipListNode(uint64_t(), m_level_max);
-    m_null = m_head;
-    m_head->next.assign(m_level_max, m_null);
+    m_head = create_node(max_level, uint64_t());
   }
 
   SkipList::~SkipList() {
-//     clear();
-    delete m_head;
+    while (m_head) {
+      SkipListNode* to_destroy = m_head;
+      m_head = m_head->next[0];
+      destroy_node(to_destroy);
+    }
   }
 
   bool SkipList::contains(uint64_t key) const {
-    return false;
+    
+    const SkipListNode* node = m_head;
+    for (int i = level; i >= 0; --i) {
+      while (node->next[i] && node->next[i]->key < key)
+        node = node->next[i];
+    }
+
+    node = node->next[0];
+    return node && node->key== key;
   }
   
   bool SkipList::insert(uint64_t key) {
-    auto node_curr = m_head;
-    auto new_node_next = std::vector<SkipListNode*>(m_level_max);
 
-    // start from the top of the head, move down if it points to null
-    // get all next references for new node
-    for (int i = 0; i <= m_level; i++) {
-      int idx = m_level - i;
-      while (node_curr->next[idx] != m_null && node_curr->next[idx]->key < key) {
-        node_curr = node_curr->next[idx];
+    auto node = m_head;
+    SkipListNode* update[max_level + 1];
+    memset(update, 0, sizeof(SkipListNode*) * (max_level + 1));
+
+    // search and store references for new node.
+    for (int i = level; i >= 0; i--) {
+      while (node->next[i] && node->next[i]->key < key) {
+        node = node->next[i];
       }
-      new_node_next[idx] = node_curr;
+      update[i] = node;
     }
+    node = node->next[0];
 
     // check unique
-    node_curr = node_curr->next[0];
-    if (node_curr != m_null && node_curr->key == key) {
+    if (node != nullptr && node->key == key) {
       return false;
     }
 
-    // new levels, no neighbors to possibly skip to, point to null
     auto new_level = random_level();
 
-    // auto new_level = 0;
-    if (new_level > m_level) {
-      for (auto i = m_level; i <= new_level; i++) {
-        new_node_next[i] = m_null;
+    // new levels, no neighbors to possibly skip to, point to head
+    if (new_level > level) {
+      for (int i = level + 1; i <= new_level; i++) {
+        update[i] = m_head;
       }
-      m_level = new_level;
+      level = new_level;
     }
+    node = create_node(new_level, key);
 
-    // stitch the new_node_next at the insertion point with the new node
-    node_curr = new SkipListNode(key, new_level+1);
-    for (auto i = 0; i <= new_level; i++) {
-      node_curr->next[i] = new_node_next[i]->next[i];
-      new_node_next[i]->next[i] = node_curr;
+    // stitch the new node into the structure
+    for (int i = 0; i <= new_level; i++) {
+      node->next[i] = update[i]->next[i];
+      update[i]->next[i] = node;
     }
 
     m_size++;
@@ -83,26 +91,32 @@ namespace apal {
   }
 
   bool SkipList::remove(uint64_t key) {
-    return false;
-  }
+      SkipListNode* node = m_head;
+      SkipListNode* update[max_level + 1];
+      memset(update, 0, sizeof(SkipListNode*) * (max_level + 1));
 
-  void SkipList::clear() {
+      for (int i = level; i >= 0; i--)
+      {
+        while (node->next[i] && node->next[i]->key < key)
+          node = node->next[i];
+        update[i] = node;
+      }
+      node = node->next[0];
 
-    SkipListNode* node = m_head->next[0];
-
-    while (node) {
-      SkipListNode* next = node->next[0];
-      delete node;
-      node = next;
+      if (node->key == key)
+      {
+        for (int i = 0; i <= level; i++) {
+          if (update[i]->next[i] != node)
+            break;
+          update[i]->next[i] = node->next[i];
+        }
+        destroy_node(node);
+        while (level > 0 && !m_head->next[level])
+          --level;
+        return true;
+      }
+      return false;
     }
-
-    for (int i = 0; i <= m_level_max; i++) {
-      m_head->next[i] = nullptr;
-    }
-
-    m_level = 0;
-    m_size = 0;
-  }
 
   size_t SkipList::size() const
   {
@@ -110,49 +124,61 @@ namespace apal {
   }
 
   void SkipList::print_full() const {
-    if (m_size == 0) {
-      return;
-    }
+    /* if (m_size == 0) {
+       return;
+     }
 
-    std::vector<std::tuple<int, size_t>> key_level;
-    auto node_curr = m_head->next[0];
+     std::vector<std::tuple<int, size_t>> key_level;
+     auto node_curr = m_head->next[0];
 
-    for (auto node_curr = m_head->next[0]; node_curr != m_null; ) {
-      key_level.emplace_back(node_curr->key, node_curr->next.size()-1);
-      node_curr = node_curr->next[0];
-    }
+     for (auto node_curr = m_head->next[0]; node_curr != m_null; ) {
+       key_level.emplace_back(node_curr->key, node_curr->next.size()-1);
+       node_curr = node_curr->next[0];
+     }
 
-    int padding = 6;
+     int padding = 6;
 
-    for (int i = m_level; i >= 0; i--) {
-      std::cout << std::setw(padding) << 'h';
-      std::cout << " | ";
+     for (int i = m_level; i >= 0; i--) {
+       std::cout << std::setw(padding) << 'h';
+       std::cout << " | ";
 
-      for (int j = 0; j < m_size; j++) {
+       for (int j = 0; j < m_size; j++) {
 
-        auto key = std::get<0>(key_level[j]);
-        auto level = std::get<1>(key_level[j]);
+         auto key = std::get<0>(key_level[j]);
+         auto level = std::get<1>(key_level[j]);
 
-        if (i <= level) {
-          std::cout << std::setw(padding) << key;
-        }
-        else {
-          std::cout << std::setw(padding) << ' ';
-        }
-      }
-      std::cout << '\n';
-    }
+         if (i <= level) {
+           std::cout << std::setw(padding) << key;
+         }
+         else {
+           std::cout << std::setw(padding) << ' ';
+         }
+       }
+       std::cout << '\n';
+     }*/
+  }
+
+  apal::SkipListNode* SkipList::create_node(int level, const uint64_t new_key)
+  {
+    void* node_mem = malloc(sizeof(SkipListNode));
+    SkipListNode* new_node = static_cast<SkipListNode*>(node_mem);
+    new (&new_node->key) uint64_t(new_key);
+
+    void* next_mem = calloc(level + 1, sizeof(SkipListNode*));
+    new_node->next = static_cast<SkipListNode**>(next_mem);
+    return new_node;
+  }
+
+  void SkipList::destroy_node(SkipListNode* node)
+  {
+    free(node->next);
+    free(node);
   }
 
   inline unsigned int SkipList::random_level() {
     auto rand = m_distribution(m_generator);
     
-    std::cout << "num: " << rand << "\n";
-    uint32_t level = __lzcnt(rand);
-    
-    std::cout << "level: " << level << "\n";
-
-    return level > m_level_max-1 ? m_level_max-1 : level;
+    return __lzcnt(rand);
   }
 
 }  // namespace apal
