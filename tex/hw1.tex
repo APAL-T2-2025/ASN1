@@ -2,6 +2,13 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{latexsym,amsfonts,amssymb,amsthm,amsmath, graphicx, float, hyperref, caption, breakurl, url}
+\usepackage{booktabs,tabulary,lipsum}
+\usepackage{dcolumn,tipa}
+\newcolumntype{d}{D{.}{.}{6.5}}
+\usepackage{siunitx}
+\usepackage[usestackEOL]{stackengine}
+\usepackage{multirow}
+
 
 \setlength{\parindent}{0in}
 \setlength{\oddsidemargin}{0in}
@@ -15,7 +22,7 @@
 \author{Austin Jetrin Maddison 6481268}
 
 \begin{document}
-	% \small
+	\small
 	
 	\maketitle
 	
@@ -149,7 +156,9 @@
 	
 	\vspace{2in} %Leave space for comments!
 	
-	
+	\pagebreak
+
+
 	\subsection*{Problem 7. Skip List}
 	\vspace{20pt}
 	\subsubsection*{Experimental Setup}
@@ -169,9 +178,13 @@
 
 All benchmarks were compiled using \texttt{-Ox} optimization level with \texttt{MSVC} (version 19.42.34436) and executed in a single-threaded environment to minimize external interference. Memory usage was measured using the Windows API \texttt{GetProcessMemory()}~\cite{getprocessmemoryinfo}.\\
 
-\subsubsection*{Questions And Experiments}
+\subsubsection*{a. Questions And Experiments}
 	
-a.1) Can we perform count coin tosses differently and is the alternative better?
+Q1) Can we perform count coin tosses differently and is the alternative better?\\
+
+Often in the past, I have used numpy bit arrays to efficiently count occurrences using \texttt{argmin/argmax}, avoiding slow loops. I thought I could apply a similar approach to simulating coin flips.\\
+
+The idea is simple: a \texttt{UINT32\_t} is represented using 32 bits, so I can generate a random 32-bit integer and treat its bits as independent coin toss trials.To determine the number of consecutive heads before the first tail, I can use a low-level function, \texttt{\_\_lzcnt(rand)}, which counts the number of leading contiguous zero bits in the integer. Since we can interpret 0s as heads and 1s as tails, this provides a fast way to compute the result without looping through individual bits.
 
 \begin{figure}[H]
 	\centering
@@ -192,7 +205,6 @@ a.1) Can we perform count coin tosses differently and is the alternative better?
 	\end{minipage}
 \end{figure}
 
-
 \begin{table}[h]
 	\centering
 	\small
@@ -208,8 +220,9 @@ a.1) Can we perform count coin tosses differently and is the alternative better?
 	\label{tab:benchmark_results}
 \end{table}
 
+Simulation results show that, counting leading 0s of a random int is have the same distributions  as using loops to coin flip for real. The alternative way of flipping coins runs around $\sim17$ cycles vs $\sim 97$ cycles.\\
 
-a.2) How to define vertical nodes withoud the downsides of introducing linked-list like overhead? \\
+{Q2) How to define vertical nodes withoud the downsides of introducing linked-list like overhead?} \\
 
 This is an awfully convenient question, because it is, I chose the question as an outlet to describe how I got to my current implementation of skip list. My first implementation of skip list was almost 2 weeks ago was horrendously slow. It took seconds to insert 1 million keys, never mind trying to insert 10s of millions of keys. It was so frustrating, I couldn't pinpoint exactly what was causing the bottleneck. The code was text-book, simple node struct, search for the insertion point, and stitch the new node/nodes into place.
 \\\\
@@ -222,9 +235,11 @@ For my array data-structure I used \texttt{std::vector}, it was a big mistake, v
 
 \pagebreak
 
-a.3) How does it perform against a reputable ordered map?\\
+Q3) How does Skip List perform against a C++ builtin Ordered Map?\\
 
+Generally the built C++ Ordered Map outperforms Skip List in both speed and memory usage. \\
 
+\vspace{10pt}
 \noindent
 \begin{minipage}{0.45\textwidth}
     \centering
@@ -367,45 +382,32 @@ a.3) How does it perform against a reputable ordered map?\\
 	\begin{minipage}{0.32\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../notebook/plot/sl_insertion_cpu_time_(ms).pdf}
-		\label{fig:cpu_time}
 	\end{minipage}\hfill
 	\begin{minipage}{0.32\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf}
-		\label{fig:physical_memory}
 	\end{minipage}\hfill\
 	\begin{minipage}{0.32\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{../notebook/plot/sl_search_cpu_time_(ms).pdf}
-		\label{fig:physical_memory}
 	\end{minipage}\hfill
+	\vspace{10pt}
+	\begin{minipage}{1\textwidth}
+		\centering
+		\includegraphics[width=.32\linewidth]{../notebook/plot/sl_search_average_running_time_(ns_op).pdf}
+		\includegraphics[width=.32\linewidth]{../notebook/plot/sl_insertion_average_running_time_(ns_op).pdf}
+	\end{minipage}\hfill
+
 	\caption{CPU Time and Memory Usage of Skip List and Ordered Map.}
+	\label{fig:sl_vs_om}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
 
-	\begin{minipage}{0.32\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../notebook/plot/sl_liminsertion_cpu_time_(ms).pdf}
-		\label{fig:cpu_time}
-	\end{minipage}\hfill
-	\begin{minipage}{0.32\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../notebook/plot/sl_liminsertion_physical_memory_usage_(kb).pdf}
-		\label{fig:physical_memory}
-	\end{minipage}\hfill\
-	\begin{minipage}{0.32\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{../notebook/plot/sl_limsearch_cpu_time_(ms).pdf}
-		\label{fig:physical_memory}
-	\end{minipage}\hfill
-	\caption{Crop of Figure 1.}
-\end{figure}
 
+Loojing at the 
 
 \pagebreak
-Q4.) How might varying max height change performance of Skip List?\\
+Q4) How might varying max height change performance of Skip List?\\
 
 \noindent
 \begin{minipage}{0.5\textwidth}
@@ -619,6 +621,15 @@ Setting $b = 6$ minimizes both performance overhead and memory usage the most. H
 		\centering
 		\includegraphics[width=1\linewidth]{../notebook/plot/search_cpu_time_(ms)}
 	\end{minipage}\hfill
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{../notebook/plot/insertion_average_running_time_(ns_op).pdf}
+	\end{minipage}\hfill
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{../notebook/plot/search_average_running_time_(ns_op).pdf}
+	\end{minipage}\hfill
+
 
 	\caption{CPU Time and Memory Usage of B-Tree and C++ Builtin Ordered Map. Inserted $2^{24}$ unique and random keys.}
 	\label{fig:om_vs_bt}
@@ -771,6 +782,111 @@ Figure~\ref{fig:om_vs_bt} illustrates that the running time for the C++ built-in
 	}
     % \captionof{table}{First Table}
 \end{minipage}%
+
+
+% \begin{minipage}{1\textwidth}
+% 	\sisetup{
+% 	table-number-alignment = center,
+% 	table-figures-integer = 1,
+% 	table-figures-decimal = 4
+% 	}
+% 	\centering
+% 	\renewcommand\footnoterule{\kern-1ex}
+% 	\renewcommand{\arraystretch}{1}
+
+% 	\resizebox{.8\textwidth}{!}{%
+% 	\begin{tabular}{l*{4}{S}}
+	
+
+% 	\toprule \multirow{3}{*}{n}   & 
+% 	\multicolumn{1}{c}{B-Tree ($b=6$)} &
+% 	 \\\midrule 
+% 	\multicolumn{2}{c}{B-Tree ($b=6$)} & 
+% 	\multicolumn{2}{c}{Ordered Map}\\
+% 	\cmidrule(r){2-3}\cmidrule(l){4-5}  &
+% 	\multicolumn{1}{c}\addstackgap{\stackanchor{CPU Time}{(ms)}} & 
+% 	\multicolumn{1}{c}\addstackgap{\stackanchor{Memory Usage}{(KB)}} & 
+% 	\multicolumn{1}{c}\addstackgap{\stackanchor{CPU Time}{(ms)}} & 
+% 	\multicolumn{1}{c}\addstackgap{\stackanchor{Memory Usage}{(KB)}} \\\midrule 
+% 	8        & 5.30E+05 & 4  		        & 3.07E-05 & 4        \\     
+% 	16       & 5.30E+05 & 0  		       & 7.67E-05 & 0        \\     
+% 	32       & 5.30E+05 & 0  		       & 1.71E-04 & 0        \\     
+% 	64       & 5.30E+05 & 0  		       & 4.53E-04 & 0        \\     
+% 	128      & 5.30E+05 & 4  		      & 9.63E-04 & 0        \\     
+% 	256      & 5.30E+05 & 4  		      & 2.22E-03 & 4        \\     
+% 	512      & 5.30E+05 & 8  		      & 4.46E-03 & 12       \\     
+% 	1024     & 5.30E+05 & 16  		     & 2.93E-02 & 24       \\    
+% 	2048     & 5.30E+05 & 32  		     & 9.42E-02 & 64       \\    
+% 	4096     & 5.30E+05 & 68  		     & 2.68E-01 & 176      \\    
+% 	8192     & 5.30E+05 & 124  		     & 6.28E-01 & 368      \\   
+% 	16384    & 5.30E+05 & 308  		    & 1.38E+00 & 684      \\   
+% 	32768    & 5.30E+05 & 576  		    & 3.29E+00 & 1584     \\   
+% 	65536    & 5.30E+05 & 1148  	    & 8.54E+00 & 3080     \\  
+% 	131072   & 5.30E+05 & 2216  	   & 2.34E+01 & 5936     \\  
+% 	262144   & 5.30E+05 & 4460  	   & 1.02E+02 & 11884    \\  
+% 	524288   & 5.30E+05 & 9356  	   & 2.66E+02 & 24628    \\  
+% 	1048576  & 5.31E+05 & 19092  	  & 8.13E+02 & 49260    \\ 
+% 	2097152  & 5.32E+05 & 38316  	  & 2.06E+03 & 98572    \\ 
+% 	4194304  & 5.34E+05 & 76508  	  & 5.06E+03 & 197348   \\ 
+% 	8388608  & 5.41E+05 & 152888  	  & 1.43E+04 & 394748   \\
+% 	16777216 & 5.58E+05 & 305684  	 & 3.06E+04 & 789744   \\
+% 	33554432 & 5.97E+05 & 611656  	 & 7.36E+04 & 1579572  \\ \bottomrule
+% 	\end{tabular}
+% 	}
+% \end{minipage}
+
+% \vspace{14pt}
+
+% \begin{minipage}{1\textwidth}
+% 	\sisetup{
+% 	table-number-alignment = center,
+% 	table-figures-integer = 1,
+% 	table-figures-decimal = 4
+% 	}
+% 	\centering
+% 	\renewcommand\footnoterule{\kern-1ex}
+% 	\renewcommand{\arraystretch}{1}
+
+% 	\resizebox{.8\textwidth}{!}{%
+% 	\begin{tabular}{l*{4}{S}}
+		
+% 	\toprule \multirow{3}{*}{n}   & 
+% 	\multicolumn{2}{c}{B-Tree ($b=6$)} & 
+% 	\multicolumn{2}{c}{Ordered Map}\\
+% 	\cmidrule(r){2-3}\cmidrule(l){4-5}  &
+% 	\multicolumn{1}{c}\addstackgap{\stackanchor{CPU Time}{(ms)}} & 
+% 	\multicolumn{1}{c}\addstackgap{\stackanchor{Memory Usage}{(KB)}} & 
+% 	\multicolumn{1}{c}\addstackgap{\stackanchor{CPU Time}{(ms)}} & 
+% 	\multicolumn{1}{c}\addstackgap{\stackanchor{Memory Usage}{(KB)}} \\\midrule 
+% 	8        & 1.66E+06 & 4  		& 3.07E-05 & 4        \\     
+% 	16       & 1.66E+06 & 0  		& 7.67E-05 & 0        \\     
+% 	32       & 1.66E+06 & 0  		& 1.71E-04 & 0        \\     
+% 	64       & 1.66E+06 & 0  		& 4.53E-04 & 0        \\     
+% 	128      & 1.66E+06 & 4  		& 9.63E-04 & 0        \\     
+% 	256      & 1.66E+06 & 4  		& 2.22E-03 & 4        \\     
+% 	512      & 1.66E+06 & 8  		& 4.46E-03 & 12       \\     
+% 	1024     & 1.66E+06 & 16  		& 2.93E-02 & 24       \\    
+% 	2048     & 1.66E+06 & 32  		& 9.42E-02 & 64       \\    
+% 	4096     & 1.66E+06 & 68  		& 2.68E-01 & 176      \\    
+% 	8192     & 1.66E+06 & 124  		& 6.28E-01 & 368      \\   
+% 	16384    & 1.66E+06 & 308  		& 1.38E+00 & 684      \\   
+% 	32768    & 1.66E+06 & 576  		& 3.29E+00 & 1584     \\   
+% 	65536    & 1.66E+06 & 1148  	& 8.54E+00 & 3080     \\  
+% 	131072   & 1.66E+06 & 2216  	& 2.34E+01 & 5936     \\  
+% 	262144   & 1.66E+06 & 4460  	& 1.02E+02 & 11884    \\  
+% 	524288   & 1.66E+06 & 9356  	& 2.66E+02 & 24628    \\  
+% 	1048576  & 1.66E+06 & 19092  	& 8.13E+02 & 49260    \\ 
+% 	2097152  & 1.66E+06 & 38316  	& 2.06E+03 & 98572    \\ 
+% 	4194304  & 1.67E+06 & 76508  	& 5.06E+03 & 197348   \\ 
+% 	8388608  & 1.68E+06 & 152888  	& 1.43E+04 & 394748   \\
+% 	16777216 & 1.72E+06 & 305684  	& 3.06E+04 & 789744   \\
+% 	33554432 & 1.81E+06 & 611656  	& 7.36E+04 & 1579572  \\ \bottomrule
+% 	\end{tabular}
+% 	}
+% \end{minipage}
+   
+
+
 
 \vspace{14pt}
 
