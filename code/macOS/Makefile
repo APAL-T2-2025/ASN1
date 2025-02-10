@@ -1,5 +1,5 @@
 CXX         = clang++
-CXXFLAGS    = -std=c++20 -O2 -Wall -Wextra
+CXXFLAGS    = -std=c++20 -O3 -Wall -Wextra
 LDFLAGS     = -lbenchmark -lpthread
 
 TARGET      = my_benchmark
