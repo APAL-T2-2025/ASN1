@@ -31,7 +31,6 @@ inline static size_t GetMemPagefile() {
   return static_cast<size_t>(-1);
 }
 
-
 inline static int GetRandomInt(int max) {
   std::mt19937 rng(std::random_device{}());
   std::uniform_int_distribution<int> dist(0, max);

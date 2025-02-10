@@ -7,7 +7,6 @@
 #include <numeric>
 #include <random>
 #include <mach/mach.h>
-#include <Kernel/mach/task_info.h>
 
 inline static size_t GetMemRam() {
   task_basic_info_data_t info;
@@ -136,13 +135,9 @@ static void OrderedMap_Search(benchmark::State& state) {
 BENCHMARK(OrderedMap_Insertion)->RangeMultiplier(2)->Range(8, 8 << 22);
 BENCHMARK_TEMPLATE(BTreeMap_Insertion, 2)->RangeMultiplier(2)->Range(8, 8 << 22);
 BENCHMARK_TEMPLATE(BTreeMap_Insertion, 4)->RangeMultiplier(2)->Range(8, 8 << 22);
-BENCHMARK_TEMPLATE(BTreeMap_Insertion, 5)->RangeMultiplier(2)->Range(8, 8 << 22);
-BENCHMARK_TEMPLATE(BTreeMap_Insertion, 6)->RangeMultiplier(2)->Range(8, 8 << 22);
 
 BENCHMARK(OrderedMap_Search)->RangeMultiplier(2)->Range(8, 8 << 22);
 BENCHMARK_TEMPLATE(BTreeMap_Search, 2)->RangeMultiplier(2)->Range(8, 8 << 22);
 BENCHMARK_TEMPLATE(BTreeMap_Search, 4)->RangeMultiplier(2)->Range(8, 8 << 22);
-BENCHMARK_TEMPLATE(BTreeMap_Search, 5)->RangeMultiplier(2)->Range(8, 8 << 22);
-BENCHMARK_TEMPLATE(BTreeMap_Search, 6)->RangeMultiplier(2)->Range(8, 8 << 22);
 
 BENCHMARK_MAIN();
