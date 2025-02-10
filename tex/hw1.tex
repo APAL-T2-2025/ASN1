@@ -19,7 +19,7 @@
 
 
 \title{Assignment 1 — Applied Algorithms, T. II/2024–25}
-\author{Austin Jetrin Maddison 6481268}
+\author{Austin Jetrin Maddison 6481268, Artem Kiselev 6580846}
 
 \begin{document}
 	\small
@@ -128,11 +128,20 @@
 	
 	
 	\subsection*{Problem 4. $x^2$ With $\pi$ Degrees of Freedom}
-	(Statement of problem goes here.)\\
-	
-	\begin{proof}
-		(Type your proof here.)
-	\end{proof}
+
+	i) Show that
+	$\operatorname{E}\left[X_{n}^{2}\right]=n$
+
+	\begin{align*}
+		\operatorname{E}\left[X_{n}^{2}\right]&=\operatorname{E}\left[ \sum_{i=1}^{n} X_i^2 \right] \\
+		\operatorname{E}\left[X_{n}^{2}\right]&=\sum_{i=1}^{n}\operatorname{E}\left[  X_i^2 \right] \\
+		\operatorname{E}\left[X^2\right]&=\operatorname{Var}\left[ X\right] +  \operatorname{E}\left[X\right]^2\\
+		\operatorname{E}\left[X^2\right]&= 1 + (0)^2\\
+		\operatorname{E}\left[X^2\right]&= 1 \\
+		\operatorname{E}\left[X_{n}^{2}\right]&=\sum_{i=1}^{n}\operatorname{E}\left[  X_i^2 \right] \\
+		\operatorname{E}\left[X_{n}^{2}\right]&=\sum_{i=1}^{n}1 \\
+		\operatorname{E}\left[X_{n}^{2}\right]&= n \\
+	\end{align*}
 	
 	\vspace{2in} %Leave space for comments!
 	
@@ -402,9 +411,8 @@ Generally the built C++ Ordered Map outperforms Skip List in both speed and memo
 	\label{fig:sl_vs_om}
 \end{figure}
 
+Built in order map is both faster and more memory efficient than my implementation of skip-list. However it is good to see that the theoritcal running time 
 
-
-Loojing at the 
 
 \pagebreak
 Q4) How might varying max height change performance of Skip List?\\

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.20)  10 FEB 2025 19:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.20)  10 FEB 2025 20:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -521,236 +521,231 @@ Underfull \hbox (badness 10000) in paragraph at lines 120--121
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 131--132
-
- []
-
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 141--142
+Underfull \hbox (badness 10000) in paragraph at lines 150--151
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
+Underfull \hbox (badness 10000) in paragraph at lines 160--161
 
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--184
+[4] [5]
+Underfull \hbox (badness 10000) in paragraph at lines 188--189
 
  []
 
 
-Overfull \hbox (3.64845pt too wide) in paragraph at lines 185--186
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
+
+ []
+
+
+Overfull \hbox (3.64845pt too wide) in paragraph at lines 194--195
 []\OT1/cmr/m/n/10.95 Often in the past, I have used numpy bit ar-rays to ef-fi-ciently count oc-cur-rences us-ing \OT1/cmtt/m/n/10.95 argmin/argmax\OT1/cmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 185--186
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
 
  []
 
-<../notebook/plot/coin_flips_for_real.pdf, id=40, 225.84677pt x 229.74756pt>
+<../notebook/plot/coin_flips_for_real.pdf, id=44, 225.84677pt x 229.74756pt>
 File: ../notebook/plot/coin_flips_for_real.pdf Graphic file (type pdf)
 <use ../notebook/plot/coin_flips_for_real.pdf>
-Package pdftex.def Info: ../notebook/plot/coin_flips_for_real.pdf  used on input line 193.
+Package pdftex.def Info: ../notebook/plot/coin_flips_for_real.pdf  used on input line 202.
 (pdftex.def)             Requested size: 150.32503pt x 152.92041pt.
-<../notebook/plot/count_leading_0s_of_random_uint_32.pdf, id=41, 233.25949pt x 229.74756pt>
+<../notebook/plot/count_leading_0s_of_random_uint_32.pdf, id=45, 233.25949pt x 229.74756pt>
 File: ../notebook/plot/count_leading_0s_of_random_uint_32.pdf Graphic file (type pdf)
 <use ../notebook/plot/count_leading_0s_of_random_uint_32.pdf>
-Package pdftex.def Info: ../notebook/plot/count_leading_0s_of_random_uint_32.pdf  used on input line 198.
+Package pdftex.def Info: ../notebook/plot/count_leading_0s_of_random_uint_32.pdf  used on input line 207.
 (pdftex.def)             Requested size: 150.32503pt x 148.06508pt.
-<../notebook/plot/comparison_of_distributions.pdf, id=42, 225.84677pt x 231.08125pt>
+<../notebook/plot/comparison_of_distributions.pdf, id=46, 225.84677pt x 231.08125pt>
 File: ../notebook/plot/comparison_of_distributions.pdf Graphic file (type pdf)
 <use ../notebook/plot/comparison_of_distributions.pdf>
-Package pdftex.def Info: ../notebook/plot/comparison_of_distributions.pdf  used on input line 203.
+Package pdftex.def Info: ../notebook/plot/comparison_of_distributions.pdf  used on input line 212.
 (pdftex.def)             Requested size: 150.32503pt x 153.80814pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--224
+Underfull \hbox (badness 10000) in paragraph at lines 232--233
 
  []
 
-[5{C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <../notebook/plot/coin_flips_for_real.pdf> <../notebook/plot/count_leading_0s_of_random_uint_32.pdf> <../notebook/plot/comparison_of_distributions.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 225--226
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 227--235
+[6{C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <../notebook/plot/coin_flips_for_real.pdf> <../notebook/plot/count_leading_0s_of_random_uint_32.pdf> <../notebook/plot/comparison_of_distributions.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 234--235
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--235
+Underfull \hbox (badness 10000) in paragraph at lines 236--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--235
+Underfull \hbox (badness 10000) in paragraph at lines 236--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--235
+Underfull \hbox (badness 10000) in paragraph at lines 236--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--235
-
- []
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 238--239
+Underfull \hbox (badness 10000) in paragraph at lines 236--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 240--241
+Underfull \hbox (badness 10000) in paragraph at lines 236--244
 
  []
 
-<../notebook/plot/sl_insertion_cpu_time_(ms).pdf, id=100, 476.98201pt x 476.98201pt>
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 247--248
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
+
+ []
+
+<../notebook/plot/sl_insertion_cpu_time_(ms).pdf, id=105, 476.98201pt x 476.98201pt>
 File: ../notebook/plot/sl_insertion_cpu_time_(ms).pdf Graphic file (type pdf)
 <use ../notebook/plot/sl_insertion_cpu_time_(ms).pdf>
-Package pdftex.def Info: ../notebook/plot/sl_insertion_cpu_time_(ms).pdf  used on input line 384.
+Package pdftex.def Info: ../notebook/plot/sl_insertion_cpu_time_(ms).pdf  used on input line 393.
 (pdftex.def)             Requested size: 150.32503pt x 150.3229pt.
-<../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf, id=101, 477.5252pt x 476.98201pt>
+<../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf, id=106, 477.5252pt x 476.98201pt>
 File: ../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf Graphic file (type pdf)
 <use ../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf>
-Package pdftex.def Info: ../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf  used on input line 388.
+Package pdftex.def Info: ../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf  used on input line 397.
 (pdftex.def)             Requested size: 150.32503pt x 150.1555pt.
-<../notebook/plot/sl_search_cpu_time_(ms).pdf, id=102, 476.98201pt x 476.98201pt>
+<../notebook/plot/sl_search_cpu_time_(ms).pdf, id=107, 476.98201pt x 476.98201pt>
 File: ../notebook/plot/sl_search_cpu_time_(ms).pdf Graphic file (type pdf)
 <use ../notebook/plot/sl_search_cpu_time_(ms).pdf>
-Package pdftex.def Info: ../notebook/plot/sl_search_cpu_time_(ms).pdf  used on input line 392.
+Package pdftex.def Info: ../notebook/plot/sl_search_cpu_time_(ms).pdf  used on input line 401.
 (pdftex.def)             Requested size: 150.32503pt x 150.3229pt.
-<../notebook/plot/sl_search_average_running_time_(ns_op).pdf, id=103, 476.98201pt x 476.98201pt>
+<../notebook/plot/sl_search_average_running_time_(ns_op).pdf, id=108, 476.98201pt x 476.98201pt>
 File: ../notebook/plot/sl_search_average_running_time_(ns_op).pdf Graphic file (type pdf)
 <use ../notebook/plot/sl_search_average_running_time_(ns_op).pdf>
-Package pdftex.def Info: ../notebook/plot/sl_search_average_running_time_(ns_op).pdf  used on input line 397.
+Package pdftex.def Info: ../notebook/plot/sl_search_average_running_time_(ns_op).pdf  used on input line 406.
 (pdftex.def)             Requested size: 150.32503pt x 150.3229pt.
-<../notebook/plot/sl_insertion_average_running_time_(ns_op).pdf, id=104, 476.98201pt x 476.98201pt>
+<../notebook/plot/sl_insertion_average_running_time_(ns_op).pdf, id=109, 476.98201pt x 476.98201pt>
 File: ../notebook/plot/sl_insertion_average_running_time_(ns_op).pdf Graphic file (type pdf)
 <use ../notebook/plot/sl_insertion_average_running_time_(ns_op).pdf>
-Package pdftex.def Info: ../notebook/plot/sl_insertion_average_running_time_(ns_op).pdf  used on input line 398.
+Package pdftex.def Info: ../notebook/plot/sl_insertion_average_running_time_(ns_op).pdf  used on input line 407.
 (pdftex.def)             Requested size: 150.32503pt x 150.3229pt.
-[7] [8 <../notebook/plot/sl_insertion_cpu_time_(ms).pdf> <../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf> <../notebook/plot/sl_search_cpu_time_(ms).pdf> <../notebook/plot/sl_search_average_running_time_(ns_op).pdf> <../notebook/plot/sl_insertion_average_running_time_(ns_op).pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
+[8] [9 <../notebook/plot/sl_insertion_cpu_time_(ms).pdf> <../notebook/plot/sl_insertion_physical_memory_usage_(kb).pdf> <../notebook/plot/sl_search_cpu_time_(ms).pdf> <../notebook/plot/sl_search_average_running_time_(ns_op).pdf> <../notebook/plot/sl_insertion_average_running_time_(ns_op).pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 418--419
 
  []
 
-<../notebook/plot/sl_maxlevel_insertion_cpu_time_(ms).pdf, id=164, 476.98201pt x 476.98201pt>
+<../notebook/plot/sl_maxlevel_insertion_cpu_time_(ms).pdf, id=168, 476.98201pt x 476.98201pt>
 File: ../notebook/plot/sl_maxlevel_insertion_cpu_time_(ms).pdf Graphic file (type pdf)
 <use ../notebook/plot/sl_maxlevel_insertion_cpu_time_(ms).pdf>
-Package pdftex.def Info: ../notebook/plot/sl_maxlevel_insertion_cpu_time_(ms).pdf  used on input line 472.
+Package pdftex.def Info: ../notebook/plot/sl_maxlevel_insertion_cpu_time_(ms).pdf  used on input line 480.
 (pdftex.def)             Requested size: 150.32503pt x 150.3229pt.
-<../notebook/plot/sl_maxlevel_insertion_physical_memory_usage_(kb).pdf, id=165, 476.98201pt x 476.98201pt>
+<../notebook/plot/sl_maxlevel_insertion_physical_memory_usage_(kb).pdf, id=169, 476.98201pt x 476.98201pt>
 File: ../notebook/plot/sl_maxlevel_insertion_physical_memory_usage_(kb).pdf Graphic file (type pdf)
 <use ../notebook/plot/sl_maxlevel_insertion_physical_memory_usage_(kb).pdf>
-Package pdftex.def Info: ../notebook/plot/sl_maxlevel_insertion_physical_memory_usage_(kb).pdf  used on input line 477.
+Package pdftex.def Info: ../notebook/plot/sl_maxlevel_insertion_physical_memory_usage_(kb).pdf  used on input line 485.
 (pdftex.def)             Requested size: 150.32503pt x 150.3229pt.
-<../notebook/plot/sl_maxlevel_search_cpu_time_(ms).pdf, id=166, 476.98201pt x 476.98201pt>
+<../notebook/plot/sl_maxlevel_search_cpu_time_(ms).pdf, id=170, 476.98201pt x 476.98201pt>
 File: ../notebook/plot/sl_maxlevel_search_cpu_time_(ms).pdf Graphic file (type pdf)
 <use ../notebook/plot/sl_maxlevel_search_cpu_time_(ms).pdf>
-Package pdftex.def Info: ../notebook/plot/sl_maxlevel_search_cpu_time_(ms).pdf  used on input line 482.
+Package pdftex.def Info: ../notebook/plot/sl_maxlevel_search_cpu_time_(ms).pdf  used on input line 490.
 (pdftex.def)             Requested size: 150.32503pt x 150.3229pt.
-[9 <../notebook/plot/sl_maxlevel_insertion_cpu_time_(ms).pdf> <../notebook/plot/sl_maxlevel_insertion_physical_memory_usage_(kb).pdf> <../notebook/plot/sl_maxlevel_search_cpu_time_(ms).pdf>]
+[10 <../notebook/plot/sl_maxlevel_insertion_cpu_time_(ms).pdf> <../notebook/plot/sl_maxlevel_insertion_physical_memory_usage_(kb).pdf> <../notebook/plot/sl_maxlevel_search_cpu_time_(ms).pdf>]
 
 pdfTeX warning: pdflatex (file ./Q8_a.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Q8_a.drawio.pdf, id=196, 580.08719pt x 145.50359pt>
+<Q8_a.drawio.pdf, id=200, 580.08719pt x 145.50359pt>
 File: Q8_a.drawio.pdf Graphic file (type pdf)
 <use Q8_a.drawio.pdf>
-Package pdftex.def Info: Q8_a.drawio.pdf  used on input line 502.
+Package pdftex.def Info: Q8_a.drawio.pdf  used on input line 510.
 (pdftex.def)             Requested size: 422.77661pt x 106.04799pt.
 
 
 pdfTeX warning: pdflatex (file ./Q8_b.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Q8_b.drawio.pdf, id=197, 580.08719pt x 145.50359pt>
+<Q8_b.drawio.pdf, id=201, 580.08719pt x 145.50359pt>
 File: Q8_b.drawio.pdf Graphic file (type pdf)
 <use Q8_b.drawio.pdf>
-Package pdftex.def Info: Q8_b.drawio.pdf  used on input line 512.
+Package pdftex.def Info: Q8_b.drawio.pdf  used on input line 520.
 (pdftex.def)             Requested size: 422.77661pt x 106.04799pt.
-[10 <./Q8_a.drawio.pdf> <./Q8_b.drawio.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 538--542
+[11 <./Q8_a.drawio.pdf> <./Q8_b.drawio.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 546--550
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 570.
+(caption)                particular \caption on input line 578.
 See the caption package documentation for explanation.
 
-<../notebook/plot/b-tree_insertion()_cpu_time.pdf, id=228, 693.792pt x 404.712pt>
+<../notebook/plot/b-tree_insertion()_cpu_time.pdf, id=232, 693.792pt x 404.712pt>
 File: ../notebook/plot/b-tree_insertion()_cpu_time.pdf Graphic file (type pdf)
 <use ../notebook/plot/b-tree_insertion()_cpu_time.pdf>
-Package pdftex.def Info: ../notebook/plot/b-tree_insertion()_cpu_time.pdf  used on input line 579.
+Package pdftex.def Info: ../notebook/plot/b-tree_insertion()_cpu_time.pdf  used on input line 587.
 (pdftex.def)             Requested size: 234.87749pt x 137.0136pt.
-<../notebook/plot/b-tree_physical_memory_usage.pdf, id=229, 693.792pt x 404.712pt>
+<../notebook/plot/b-tree_physical_memory_usage.pdf, id=233, 693.792pt x 404.712pt>
 File: ../notebook/plot/b-tree_physical_memory_usage.pdf Graphic file (type pdf)
 <use ../notebook/plot/b-tree_physical_memory_usage.pdf>
-Package pdftex.def Info: ../notebook/plot/b-tree_physical_memory_usage.pdf  used on input line 584.
+Package pdftex.def Info: ../notebook/plot/b-tree_physical_memory_usage.pdf  used on input line 592.
 (pdftex.def)             Requested size: 234.87749pt x 137.0136pt.
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 590--593
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 598--601
 
  []
 
-<../notebook/plot/b-tree_benchmark_normalized.pdf, id=239, 1416.49196pt x 404.712pt>
+<../notebook/plot/b-tree_benchmark_normalized.pdf, id=243, 1416.49196pt x 404.712pt>
 File: ../notebook/plot/b-tree_benchmark_normalized.pdf Graphic file (type pdf)
 <use ../notebook/plot/b-tree_benchmark_normalized.pdf>
-Package pdftex.def Info: ../notebook/plot/b-tree_benchmark_normalized.pdf  used on input line 598.
+Package pdftex.def Info: ../notebook/plot/b-tree_benchmark_normalized.pdf  used on input line 606.
 (pdftex.def)             Requested size: 469.75499pt x 134.21614pt.
-<../notebook/plot/insertion_cpu_time_(ms).pdf, id=240, 838.03488pt x 549.25201pt>
+<../notebook/plot/insertion_cpu_time_(ms).pdf, id=244, 838.03488pt x 549.25201pt>
 File: ../notebook/plot/insertion_cpu_time_(ms).pdf Graphic file (type pdf)
 <use ../notebook/plot/insertion_cpu_time_(ms).pdf>
-Package pdftex.def Info: ../notebook/plot/insertion_cpu_time_(ms).pdf  used on input line 613.
+Package pdftex.def Info: ../notebook/plot/insertion_cpu_time_(ms).pdf  used on input line 621.
 (pdftex.def)             Requested size: 234.87749pt x 153.93199pt.
-<../notebook/plot/insertion_physical_memory_usage_(kb).pdf, id=241, 837.81862pt x 549.25201pt>
+<../notebook/plot/insertion_physical_memory_usage_(kb).pdf, id=245, 837.81862pt x 549.25201pt>
 File: ../notebook/plot/insertion_physical_memory_usage_(kb).pdf Graphic file (type pdf)
 <use ../notebook/plot/insertion_physical_memory_usage_(kb).pdf>
-Package pdftex.def Info: ../notebook/plot/insertion_physical_memory_usage_(kb).pdf  used on input line 617.
+Package pdftex.def Info: ../notebook/plot/insertion_physical_memory_usage_(kb).pdf  used on input line 625.
 (pdftex.def)             Requested size: 234.87749pt x 153.97389pt.
-<../notebook/plot/search_cpu_time_(ms).pdf, id=242, 837.8821pt x 549.25201pt>
+<../notebook/plot/search_cpu_time_(ms).pdf, id=246, 837.8821pt x 549.25201pt>
 File: ../notebook/plot/search_cpu_time_(ms).pdf Graphic file (type pdf)
 <use ../notebook/plot/search_cpu_time_(ms).pdf>
-Package pdftex.def Info: ../notebook/plot/search_cpu_time_(ms).pdf  used on input line 622.
+Package pdftex.def Info: ../notebook/plot/search_cpu_time_(ms).pdf  used on input line 630.
 (pdftex.def)             Requested size: 234.87749pt x 153.96552pt.
-<../notebook/plot/insertion_average_running_time_(ns_op).pdf, id=243, 838.04977pt x 549.25201pt>
+<../notebook/plot/insertion_average_running_time_(ns_op).pdf, id=247, 838.04977pt x 549.25201pt>
 File: ../notebook/plot/insertion_average_running_time_(ns_op).pdf Graphic file (type pdf)
 <use ../notebook/plot/insertion_average_running_time_(ns_op).pdf>
-Package pdftex.def Info: ../notebook/plot/insertion_average_running_time_(ns_op).pdf  used on input line 626.
+Package pdftex.def Info: ../notebook/plot/insertion_average_running_time_(ns_op).pdf  used on input line 634.
 (pdftex.def)             Requested size: 234.87749pt x 153.93199pt.
-<../notebook/plot/search_average_running_time_(ns_op).pdf, id=244, 838.04977pt x 549.25201pt>
+<../notebook/plot/search_average_running_time_(ns_op).pdf, id=248, 838.04977pt x 549.25201pt>
 File: ../notebook/plot/search_average_running_time_(ns_op).pdf Graphic file (type pdf)
 <use ../notebook/plot/search_average_running_time_(ns_op).pdf>
-Package pdftex.def Info: ../notebook/plot/search_average_running_time_(ns_op).pdf  used on input line 630.
+Package pdftex.def Info: ../notebook/plot/search_average_running_time_(ns_op).pdf  used on input line 638.
 (pdftex.def)             Requested size: 234.87749pt x 153.93199pt.
-[12 <../notebook/plot/b-tree_insertion()_cpu_time.pdf> <../notebook/plot/b-tree_physical_memory_usage.pdf> <../notebook/plot/b-tree_benchmark_normalized.pdf>] [13 <../notebook/plot/insertion_cpu_time_(ms).pdf> <../notebook/plot/insertion_physical_memory_usage_(kb).pdf> <../notebook/plot/search_cpu_time_(ms).pdf> <../notebook/plot/insertion_average_running_time_(ns_op).pdf> <../notebook/plot/search_average_running_time_(ns_op).pdf>] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 906--909
+[13 <../notebook/plot/b-tree_insertion()_cpu_time.pdf> <../notebook/plot/b-tree_physical_memory_usage.pdf> <../notebook/plot/b-tree_benchmark_normalized.pdf>] [14 <../notebook/plot/insertion_cpu_time_(ms).pdf> <../notebook/plot/insertion_physical_memory_usage_(kb).pdf> <../notebook/plot/search_cpu_time_(ms).pdf> <../notebook/plot/insertion_average_running_time_(ns_op).pdf> <../notebook/plot/search_average_running_time_(ns_op).pdf>] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 914--917
 []$\OT1/cmtt/m/n/10.95 https : / / learn . microsoft . com / en-[]us / windows / win32 / api / psapi /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 911--913
+Underfull \hbox (badness 10000) in paragraph at lines 919--921
 []\OT1/cmr/m/n/10.95 Skip Lists Stack Over-flow. []$\OT1/cmtt/m/n/10.95 https : / / stackoverflow . com / questions / 31580869 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 911--913
+Underfull \hbox (badness 10000) in paragraph at lines 919--921
 \OT1/cmtt/m/n/10.95 skip-[]lists-[]are-[]they-[]really-[]performing-[]as-[]good-[]as-[]pugh-[]paper-[]claim / 34003558 #
  []
 
-[15] (hw1.aux)
+[16] (hw1.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -763,17 +758,17 @@ Package rerunfilecheck Info: File `hw1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 17560 strings out of 474486
- 346833 string characters out of 5743755
+ 17561 strings out of 474486
+ 346840 string characters out of 5743755
  1955542 words of memory out of 5000000
  39563 multiletter control sequences out of 15000+600000
  571912 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  79i,10n,93p,691b,1156s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss17.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Austi/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on hw1.pdf (15 pages, 1238730 bytes).
+Output written on hw1.pdf (16 pages, 1242315 bytes).
 PDF statistics:
- 478 PDF objects out of 1000 (max. 8388607)
- 45 named destinations out of 1000 (max. 500000)
+ 482 PDF objects out of 1000 (max. 8388607)
+ 46 named destinations out of 1000 (max. 500000)
  106 words of extra memory for PDF output out of 10000 (max. 10000000)
 
