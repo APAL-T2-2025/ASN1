@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/kisel/uni/apal/A1/ASN1/code/src",
+      "program": "/Users/kisel/uni/apal/A1/ASN1/code/src/build/Debug/outDebug"
+    }
+  ]
+}
