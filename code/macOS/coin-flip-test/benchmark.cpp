@@ -9,7 +9,7 @@ std::uniform_real_distribution<double> dist_real(0.0, 1.0);
 
 inline uint32_t coin_flip_count_leading() {
   auto rand = dist_int(gen);
-  return __lzcnt(rand);
+  return __builtin_clz(rand);
 }
 
 inline uint32_t coin_flip_for_real() {

@@ -1,39 +1,40 @@
 #include "fc/btree.h"
 #include <iostream>
 #include <string>
-
-#include <windows.h>
-#include <psapi.h>
-
 #include <benchmark/benchmark.h>
 #include <map>
 #include <utility>
-#include <gflags/gflags.h>
 #include <numeric>
 #include <random>
-
+#include <mach/mach.h>
+#include <Kernel/mach/task_info.h>
 
 inline static size_t GetMemRam() {
-  PROCESS_MEMORY_COUNTERS memInfo;
-
-  if (GetProcessMemoryInfo(GetCurrentProcess(), &memInfo, sizeof(memInfo))) {
-    return memInfo.WorkingSetSize / 1024; // KB
+  task_basic_info_data_t info;
+  mach_msg_type_number_t infoCount = TASK_BASIC_INFO_COUNT;
+  if (task_info(reinterpret_cast<task_name_t>(mach_task_self()),
+                TASK_BASIC_INFO,
+                reinterpret_cast<task_info_t>(&info),
+                &infoCount) == KERN_SUCCESS) {
+    return info.resident_size / 1024; // KB
   }
-
-  return -1;
+  return static_cast<size_t>(-1);
 }
 
 inline static size_t GetMemPagefile() {
-  PROCESS_MEMORY_COUNTERS memInfo;
-  if (GetProcessMemoryInfo(GetCurrentProcess(), &memInfo, sizeof(memInfo))) {
-    return memInfo.PagefileUsage / 1024; // KB
+  task_vm_info_data_t vmInfo;
+  mach_msg_type_number_t vmInfoCount = TASK_VM_INFO_COUNT;
+  if (task_info(reinterpret_cast<task_name_t>(mach_task_self()),
+                TASK_VM_INFO,
+                reinterpret_cast<task_info_t>(&vmInfo),
+                &vmInfoCount) == KERN_SUCCESS) {
+    return vmInfo.virtual_size / 1024; // KB
   }
-  return -1;
+  return static_cast<size_t>(-1);
 }
 
 template <int B>
 static void BTreeMap_Insertion(benchmark::State& state) {
-
   std::vector<int> keys(state.range(0));
   std::iota(keys.begin(), keys.end(), 0);
   std::shuffle(keys.begin(), keys.end(), std::mt19937{ std::random_device{}() });
@@ -57,7 +58,6 @@ static void BTreeMap_Insertion(benchmark::State& state) {
 }
 
 static void OrderedMap_Insertion(benchmark::State& state) {
-
   state.PauseTiming();
 
   std::vector<int> keys(state.range(0));
@@ -77,18 +77,14 @@ static void OrderedMap_Insertion(benchmark::State& state) {
   }
   state.PauseTiming();
 
-
   state.counters["RAM"] = double(GetMemRam()) - memRam;
   state.counters["Page"] = double(GetMemPagefile()) - memPage;
 }
 
-
 template <int B>
 static void BTreeMap_Search(benchmark::State& state) {
-
   namespace fc = frozenca;
   state.PauseTiming();
-
 
   double memRam = GetMemRam();
   double memPage = GetMemPagefile();
@@ -97,16 +93,12 @@ static void BTreeMap_Search(benchmark::State& state) {
   std::iota(keys.begin(), keys.end(), 0);
   std::shuffle(keys.begin(), keys.end(), std::mt19937{ std::random_device{}() });
 
-
-
   fc::BTreeSet<int, B> btree;
-
   for (auto key : keys) {
     btree.insert(key);
   }
 
   state.ResumeTiming();
-
   for (auto _ : state) {
     for (auto key : keys) {
       benchmark::DoNotOptimize(btree.find(key));
@@ -118,9 +110,7 @@ static void BTreeMap_Search(benchmark::State& state) {
   state.counters["Page"] = double(GetMemPagefile()) - memPage;
 }
 
-
 static void OrderedMap_Search(benchmark::State& state) {
-
   std::vector<int> keys(state.range(0));
   std::iota(keys.begin(), keys.end(), 0);
   std::shuffle(keys.begin(), keys.end(), std::mt19937{ std::random_device{}() });
@@ -129,7 +119,6 @@ static void OrderedMap_Search(benchmark::State& state) {
   double memPage = GetMemPagefile();
 
   std::set<int> ordered_set;
-
   for (auto key : keys) {
     ordered_set.insert(key);
   }
